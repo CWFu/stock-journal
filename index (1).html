@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>股市复盘笔记</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0f0f;
+  --bg2: #161616;
+  --bg3: #1e1e1e;
+  --bg4: #252525;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #e8e6e0;
+  --text2: #9a9690;
+  --text3: #5a5854;
+  --accent: #c8a96e;
+  --accent2: #8a6f42;
+  --green: #4a9e6b;
+  --green-bg: rgba(74,158,107,0.12);
+  --red: #c05454;
+  --red-bg: rgba(192,84,84,0.12);
+  --amber: #c8943a;
+  --amber-bg: rgba(200,148,58,0.12);
+  --serif: 'Noto Serif SC', serif;
+  --sans: 'Noto Sans SC', sans-serif;
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(15,15,15,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; gap: 0;
+  height: 52px;
+}
+.nav-brand {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-right: 32px;
+  white-space: nowrap;
+}
+.nav-tabs { display: flex; gap: 0; flex: 1; overflow-x: auto; }
+.nav-tab {
+  padding: 0 16px;
+  height: 52px;
+  display: flex; align-items: center;
+  font-size: 13px;
+  color: var(--text3);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  background: none; border-top: none; border-left: none; border-right: none;
+  font-family: var(--sans);
+  font-weight: 400;
+}
+.nav-tab:hover { color: var(--text2); }
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.nav-date {
+  font-size: 12px; color: var(--text3);
+  margin-left: auto; white-space: nowrap;
+  padding-left: 16px;
+}
+
+/* MAIN */
+main { max-width: 960px; margin: 0 auto; padding: 28px 20px 80px; }
+
+/* PANELS */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* PAGE HEADER */
+.page-header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.page-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--text);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.page-sub { font-size: 12px; color: var(--text3); }
+
+/* CARDS */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.card-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.card-title span {
+  color: var(--accent);
+}
+
+/* GRID */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media(max-width:640px) {
+  .grid2 { grid-template-columns: 1fr; }
+  .grid3 { grid-template-columns: 1fr 1fr; }
+}
+
+/* STAT */
+.stat { padding: 16px; background: var(--bg3); border-radius: var(--radius-sm); }
+.stat-val { font-size: 24px; font-weight: 500; color: var(--text); line-height: 1; margin-bottom: 6px; }
+.stat-val.up { color: var(--green); }
+.stat-val.down { color: var(--red); }
+.stat-lbl { font-size: 11px; color: var(--text3); }
+
+/* FORM */
+.form-group { margin-bottom: 16px; }
+.form-label { font-size: 12px; color: var(--text2); margin-bottom: 6px; display: block; }
+.form-label .req { color: var(--red); margin-left: 2px; }
+input[type=text], input[type=number], input[type=date], select, textarea {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--accent2); }
+textarea { resize: vertical; min-height: 80px; }
+select option { background: var(--bg3); }
+
+/* BUTTONS */
+.btn {
+  padding: 9px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  border: none;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--accent); color: #1a1208; }
+.btn-primary:hover { opacity: 0.88; }
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+}
+.btn-ghost:hover { border-color: var(--accent2); color: var(--accent); }
+.btn-danger { background: var(--red-bg); border: 1px solid var(--red); color: var(--red); }
+.btn-sm { padding: 5px 12px; font-size: 12px; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* TAGS */
+.tag {
+  display: inline-block;
+  font-size: 11px; padding: 2px 8px;
+  border-radius: 20px; font-weight: 500;
+}
+.tag-green { background: var(--green-bg); color: var(--green); }
+.tag-red { background: var(--red-bg); color: var(--red); }
+.tag-amber { background: var(--amber-bg); color: var(--amber); }
+.tag-gray { background: var(--bg4); color: var(--text2); }
+
+/* RULES */
+.rule-item {
+  display: flex; gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.rule-item:last-child { border-bottom: none; }
+.rule-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 500; flex-shrink: 0; margin-top: 1px;
+}
+.rule-body { flex: 1; }
+.rule-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.rule-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
+.rule-eg { font-size: 11px; color: var(--text3); margin-top: 3px; font-style: italic; }
+
+/* CHECKLIST */
+.check-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg3);
+  margin-bottom: 8px;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+.check-item:hover { background: var(--bg4); }
+.check-item input[type=checkbox] {
+  width: 16px; height: 16px; min-width: 16px;
+  margin-top: 1px; cursor: pointer;
+  accent-color: var(--accent);
+  padding: 0;
+}
+.check-text { font-size: 13px; color: var(--text2); flex: 1; user-select: none; }
+.check-text.done { text-decoration: line-through; color: var(--text3); }
+
+/* SCORE BOX */
+.score-box {
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  text-align: center;
+  margin-top: 16px;
+}
+.score-num { font-size: 32px; font-weight: 500; color: var(--accent); }
+.score-lbl { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.score-verdict { font-size: 13px; font-weight: 500; margin-top: 8px; }
+
+/* TRADE LIST */
+.trade-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+}
+.trade-item:hover { border-color: var(--border2); }
+.trade-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; flex-wrap: wrap;
+}
+.trade-name { font-size: 15px; font-weight: 500; color: var(--text); }
+.trade-meta { font-size: 12px; color: var(--text3); }
+.trade-body { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.trade-body strong { color: var(--text); font-weight: 500; }
+.trade-result {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.trade-result-item { font-size: 12px; color: var(--text3); }
+.trade-result-item span { font-weight: 500; }
+.trade-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+/* HOLDINGS */
+.holding-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px 80px 80px;
+  gap: 12px; align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.holding-row:last-child { border-bottom: none; }
+.holding-header {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px 80px 80px;
+  gap: 12px;
+  padding: 8px 0 10px;
+  border-bottom: 1px solid var(--border2);
+  font-size: 11px; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+@media(max-width:600px) {
+  .holding-row, .holding-header {
+    grid-template-columns: 1fr 70px 70px;
+  }
+  .holding-row > *:nth-child(4),
+  .holding-row > *:nth-child(5),
+  .holding-header > *:nth-child(4),
+  .holding-header > *:nth-child(5) { display: none; }
+}
+
+/* SIGNAL */
+.signal-item {
+  display: flex; gap: 14px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  border-left: 3px solid;
+}
+.signal-red { background: var(--red-bg); border-color: var(--red); }
+.signal-green { background: var(--green-bg); border-color: var(--green); }
+.signal-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+.signal-red .signal-title { color: var(--red); }
+.signal-green .signal-title { color: var(--green); }
+.signal-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
+.signal-date { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+/* PHASE */
+.phase-row {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.phase-row:last-child { border-bottom: none; }
+.phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.phase-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.phase-desc { font-size: 12px; color: var(--text2); line-height: 1.5; margin-top: 2px; }
+
+/* EMPTY STATE */
+.empty {
+  text-align: center; padding: 48px 20px;
+  color: var(--text3); font-size: 13px;
+}
+.empty-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.4; }
+
+/* MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 28px;
+  width: 100%; max-width: 560px;
+  max-height: 90vh; overflow-y: auto;
+}
+.modal-title {
+  font-family: var(--serif);
+  font-size: 18px; font-weight: 400;
+  color: var(--text); margin-bottom: 24px;
+}
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 2px; }
+
+/* ANIMATIONS */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.panel.active { animation: fadeIn 0.2s ease; }
+
+/* REVIEW */
+.review-top {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
+}
+@media(max-width:600px) { .review-top { grid-template-columns: 1fr; } }
+.review-section { margin-bottom: 20px; }
+.review-section-title {
+  font-size: 12px; color: var(--text3); text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: 10px; font-weight: 500;
+}
+.pnl-bar-wrap { margin-bottom: 6px; }
+.pnl-bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 4px; }
+.pnl-bar-bg { background: var(--bg4); border-radius: 3px; height: 6px; }
+.pnl-bar-fill { border-radius: 3px; height: 6px; transition: width 0.4s ease; }
+
+/* TODAY PANEL */
+.today-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 16px; }
+@media(max-width:640px) { .today-grid { grid-template-columns: 1fr; } }
+.market-input-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;
+}
+.index-card {
+  background: var(--bg3); border-radius: var(--radius-sm);
+  padding: 12px; text-align: center;
+}
+.index-name { font-size: 11px; color: var(--text3); margin-bottom: 4px; }
+.index-val { font-size: 18px; font-weight: 500; color: var(--text); }
+.index-chg { font-size: 12px; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">复盘笔记</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPanel('today')">今日</button>
+    <button class="nav-tab" onclick="showPanel('holdings')">持仓</button>
+    <button class="nav-tab" onclick="showPanel('checklist')">入场检查</button>
+    <button class="nav-tab" onclick="showPanel('trades')">交易记录</button>
+    <button class="nav-tab" onclick="showPanel('signals')">信号</button>
+    <button class="nav-tab" onclick="showPanel('rules')">规则手册</button>
+    <button class="nav-tab" onclick="showPanel('stats')">统计</button>
+  </div>
+  <div class="nav-date" id="nav-date"></div>
+</nav>
+
+<main>
+
+<!-- TODAY -->
+<div class="panel active" id="panel-today">
+  <div class="page-header">
+    <div class="page-title">今日复盘</div>
+    <div class="page-sub" id="today-date-sub"></div>
+  </div>
+  <div class="today-grid">
+    <div>
+      <div class="card">
+        <div class="card-title">大盘指数 <span>手动更新</span></div>
+        <div class="market-input-row">
+          <div>
+            <div class="form-label">上证指数</div>
+            <input type="number" id="idx-sh" placeholder="4124" step="0.01" onchange="saveMarket()">
+          </div>
+          <div>
+            <div class="form-label">深证成指</div>
+            <input type="number" id="idx-sz" placeholder="14172" step="0.01" onchange="saveMarket()">
+          </div>
+          <div>
+            <div class="form-label">创业板</div>
+            <input type="number" id="idx-cy" placeholder="3229" step="0.01" onchange="saveMarket()">
+          </div>
+          <div>
+            <div class="form-label">今日涨跌 %</div>
+            <input type="number" id="idx-chg" placeholder="+0.38" step="0.01" onchange="saveMarket()">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">重点关注板块 / 个股动态</div>
+        <textarea id="today-watchlist" placeholder="今日重点观察的板块或个股，价格变化，异动原因..." rows="5" oninput="saveTodayNote()"></textarea>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">当日投资复盘</div>
+        <div class="form-group">
+          <div class="form-label">今天做了什么操作？（没操作也要写"观察"）</div>
+          <textarea id="today-action" placeholder="买入/卖出/持仓不动/观察..." rows="3" oninput="saveTodayNote()"></textarea>
+        </div>
+        <div class="form-group">
+          <div class="form-label">判断是否正确？为什么？</div>
+          <textarea id="today-review" placeholder="哪里判断准了，哪里判断错了，原因是什么..." rows="3" oninput="saveTodayNote()"></textarea>
+        </div>
+        <div class="form-group">
+          <div class="form-label">明天需要关注什么？</div>
+          <textarea id="today-tomorrow" placeholder="明天的观察重点、计划操作..." rows="2" oninput="saveTodayNote()"></textarea>
+        </div>
+        <div class="form-group">
+          <div class="form-label">今日情绪评分（1-10）</div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <input type="range" id="mood" min="1" max="10" value="5" style="flex:1;" oninput="document.getElementById('mood-val').textContent=this.value;saveTodayNote()">
+            <span id="mood-val" style="font-size:16px;font-weight:500;color:var(--accent);min-width:20px;">5</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:4px;">
+            <span>极度恐慌</span><span>平静理性</span><span>过度贪婪</span>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="saveTodayFull()">保存今日复盘</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOLDINGS -->
+<div class="panel" id="panel-holdings">
+  <div class="page-header">
+    <div class="page-title">当前持仓</div>
+    <div class="page-sub">手动更新现价，系统自动计算盈亏</div>
+  </div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+      <div class="card-title" style="margin:0;">持仓列表</div>
+      <button class="btn btn-ghost btn-sm" onclick="openModal('modal-add-holding')">+ 添加持仓</button>
+    </div>
+    <div id="holdings-list"></div>
+  </div>
+  <div class="grid3" id="holdings-stats">
+    <div class="stat"><div class="stat-val" id="hs-total">--</div><div class="stat-lbl">总市值</div></div>
+    <div class="stat"><div class="stat-val" id="hs-pnl">--</div><div class="stat-lbl">总持仓盈亏</div></div>
+    <div class="stat"><div class="stat-val" id="hs-pnlpct">--</div><div class="stat-lbl">盈亏比例</div></div>
+  </div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="panel" id="panel-checklist">
+  <div class="page-header">
+    <div class="page-title">入场自检</div>
+    <div class="page-sub">买入任何股票前，必须逐条核对。全绿才能进场。</div>
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="card">
+        <div class="card-title">基本面门槛</div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">我能用两三句话讲清楚这只股票为什么会涨</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">公司有护城河（垄断/专利/央企/高分红之一）</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">行业不在下行周期顶部</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">公司非持续亏损（或有明确反转逻辑）</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">仓位规则</div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">这只股票仓位不超过总资产30%</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">买入后仍保留至少20%现金</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">我不是在情绪激动状态下做这个决定</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">技术面信号（满足2条以上）</div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">股价在5/10/20日均线全部下方（低位）</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">已经横盘至少1个月</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">出现圆弧底或放量下砸后企稳</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
+          <div class="check-text">跌势明显变缓（从大阴变小阴小阳）</div>
+        </div>
+      </div>
+      <div class="score-box">
+        <div class="score-num" id="cl-score">0 / 11</div>
+        <div class="score-lbl">条件满足</div>
+        <div class="score-verdict" id="cl-verdict" style="color:var(--text3);">尚未满足入场条件</div>
+      </div>
+      <div style="margin-top:12px;">
+        <div class="form-group">
+          <div class="form-label">记录检查的股票名</div>
+          <input type="text" id="cl-stock" placeholder="例：赛轮轮胎">
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="saveChecklistRecord()" style="width:100%;">保存本次检查记录</button>
+        <button class="btn btn-ghost btn-sm" onclick="resetChecklist()" style="width:100%;margin-top:8px;">重置</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRADES -->
+<div class="panel" id="panel-trades">
+  <div class="page-header">
+    <div class="page-title">交易记录</div>
+    <div class="page-sub">每笔操作前写下理由，操作后记录结果</div>
+  </div>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+    <button class="btn btn-primary" onclick="openModal('modal-add-trade')">+ 新增记录</button>
+  </div>
+  <div id="trades-list"></div>
+</div>
+
+<!-- SIGNALS -->
+<div class="panel" id="panel-signals">
+  <div class="page-header">
+    <div class="page-title">信号记录</div>
+    <div class="page-sub">记录重大错误警示（红色）和正确判断（绿色）</div>
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="font-size:13px;font-weight:500;color:var(--red);">红色信号·重大错误警示</div>
+        <button class="btn btn-ghost btn-sm" onclick="openSignalModal('red')">+ 添加</button>
+      </div>
+      <div id="signals-red"></div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="font-size:13px;font-weight:500;color:var(--green);">绿色信号·正确判断记录</div>
+        <button class="btn btn-ghost btn-sm" onclick="openSignalModal('green')">+ 添加</button>
+      </div>
+      <div id="signals-green"></div>
+    </div>
+  </div>
+</div>
+
+<!-- RULES -->
+<div class="panel" id="panel-rules">
+  <div class="page-header">
+    <div class="page-title">规则手册</div>
+    <div class="page-sub">从朱老师七个月聊天记录提炼的核心规则</div>
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="card">
+        <div class="card-title">选股资格线 <span>必须全部满足</span></div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:#EAF3DE;color:#3B6D11;">1</div>
+          <div class="rule-body">
+            <div class="rule-name">能讲清楚故事</div>
+            <div class="rule-desc">用两三句话说清楚它为什么会涨。讲不清楚不买。</div>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:#EAF3DE;color:#3B6D11;">2</div>
+          <div class="rule-body">
+            <div class="rule-name">公司有护城河</div>
+            <div class="rule-desc">垄断技术/专利、细分龙头、国家背书/央企、高分红+稳定盈利，满足其一。</div>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:#EAF3DE;color:#3B6D11;">3</div>
+          <div class="rule-body">
+            <div class="rule-name">行业不在周期顶部</div>
+            <div class="rule-desc">判断行业周期阶段。顶部和下行途中不买，等底部确认。</div>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:#EAF3DE;color:#3B6D11;">4</div>
+          <div class="rule-body">
+            <div class="rule-name">排除垃圾股</div>
+            <div class="rule-desc">无业绩纯炒作、持续亏损无反转逻辑、大涨后未经横盘，全排除。</div>
+            <div class="rule-eg">"要远离垃圾股，就跟远离垃圾人一样。"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">出场信号 <span>任意一条考虑减仓</span></div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">A</div>
+          <div class="rule-body"><div class="rule-name">涨势变缓</div><div class="rule-desc">连续上涨后出现小阳小阴、涨速放缓。不等最高点。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">B</div>
+          <div class="rule-body"><div class="rule-name">高位大红柱</div><div class="rule-desc">成交量突然放大且下跌=主力出货信号。割肉也要跑。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">C</div>
+          <div class="rule-body"><div class="rule-name">高位横盘</div><div class="rule-desc">涨到高位后横盘=出货模式。此时不管是否盈利都离场。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">D</div>
+          <div class="rule-body"><div class="rule-name">换手率打到历史高位</div><div class="rule-desc">对照历史换手率，接近历史高点=出货顶部信号。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">E</div>
+          <div class="rule-body"><div class="rule-name">故事逻辑被证伪</div><div class="rule-desc">当初买入的基本面逻辑根本性改变，不管涨跌立刻重新评估。</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">入场信号 <span>满足2条以上才进</span></div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">A</div>
+          <div class="rule-body"><div class="rule-name">三线低位</div><div class="rule-desc">股价在5/10/20日均线全部下方。这是低位基准。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">B</div>
+          <div class="rule-body">
+            <div class="rule-name">横盘至少1个月</div>
+            <div class="rule-desc">长期横盘=主力吸筹。横盘越长筹码越足。</div>
+            <div class="rule-eg">"底部横盘装僵尸股，是最佳买入窗口。"</div>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">C</div>
+          <div class="rule-body"><div class="rule-name">圆弧底形态</div><div class="rule-desc">从急跌转缓跌再平缓，形成弧形底部。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">D</div>
+          <div class="rule-body">
+            <div class="rule-name">放量砸后企稳</div>
+            <div class="rule-desc">大成交量急跌后，量能萎缩、价格企稳=洗盘接近尾声。</div>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">E</div>
+          <div class="rule-body"><div class="rule-name">跌势变缓那几天</div><div class="rule-desc">连续大阴线变小阴小阳，跌速明显放缓。</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">禁止清单 <span>永远不做</span></div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
+          <div class="rule-body"><div class="rule-name">不追高</div><div class="rule-desc">大涨的股票不买，除非经历充分横盘。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
+          <div class="rule-body"><div class="rule-name">不在下跌途中抄底</div><div class="rule-desc">等日K线变平缓出现底部信号再进。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
+          <div class="rule-body"><div class="rule-name">不因情绪做决定</div><div class="rule-desc">一只股的亏损情绪不能影响另一只的操作。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
+          <div class="rule-body"><div class="rule-name">单股不超过30%</div><div class="rule-desc">任何一只股票不超过总资产30%，留20%现金。</div></div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
+          <div class="rule-body"><div class="rule-name">不买读不懂的行业</div><div class="rule-desc">"你要非常了解这个行业，这样信念底气才足。"</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">五阶段生命周期</div>
+        <div class="phase-row"><div class="phase-dot" style="background:#5a5854;"></div><div><div class="phase-name">① 底部放量</div><div class="phase-desc">第一次放量，价格未大涨。主力开始建仓。</div></div></div>
+        <div class="phase-row"><div class="phase-dot" style="background:#7F77DD;"></div><div><div class="phase-name">② 底部横盘吸筹</div><div class="phase-desc">长期低位横盘，几乎没波动。<strong style="color:var(--accent)">最佳买入窗口。</strong></div></div></div>
+        <div class="phase-row"><div class="phase-dot" style="background:#4a9e6b;"></div><div><div class="phase-name">③ 震荡上行</div><div class="phase-desc">缓慢上涨有回调，低点不断抬高。可做T降成本。</div></div></div>
+        <div class="phase-row"><div class="phase-dot" style="background:#c8943a;"></div><div><div class="phase-name">④ 爆拉</div><div class="phase-desc">快速大幅上涨。涨势变缓时开始分批卖出。</div></div></div>
+        <div class="phase-row"><div class="phase-dot" style="background:#c05454;"></div><div><div class="phase-name">⑤ 高位横盘出货</div><div class="phase-desc">高位横盘=主力出货。无论盈亏都应离场。</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="panel" id="panel-stats">
+  <div class="page-header">
+    <div class="page-title">交易统计</div>
+    <div class="page-sub">基于你的交易记录自动计算</div>
+  </div>
+  <div class="grid3" style="margin-bottom:20px;">
+    <div class="stat"><div class="stat-val" id="st-total">0</div><div class="stat-lbl">总交易次数</div></div>
+    <div class="stat"><div class="stat-val up" id="st-win">0</div><div class="stat-lbl">盈利次数</div></div>
+    <div class="stat"><div class="stat-val down" id="st-loss">0</div><div class="stat-lbl">亏损次数</div></div>
+    <div class="stat"><div class="stat-val" id="st-winrate">--%</div><div class="stat-lbl">胜率</div></div>
+    <div class="stat"><div class="stat-val up" id="st-avgwin">--</div><div class="stat-lbl">平均盈利%</div></div>
+    <div class="stat"><div class="stat-val down" id="st-avgloss">--</div><div class="stat-lbl">平均亏损%</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">各股盈亏记录</div>
+    <div id="st-breakdown"></div>
+  </div>
+</div>
+
+</main>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-add-holding">
+  <div class="modal">
+    <div class="modal-title">添加持仓</div>
+    <div class="form-group"><div class="form-label">股票名称 <span class="req">*</span></div><input type="text" id="h-name" placeholder="例：赛轮轮胎"></div>
+    <div class="form-group"><div class="form-label">证券代码</div><input type="text" id="h-code" placeholder="例：601058"></div>
+    <div class="grid2">
+      <div class="form-group"><div class="form-label">持仓数量（股）<span class="req">*</span></div><input type="number" id="h-qty" placeholder="800"></div>
+      <div class="form-group"><div class="form-label">买入均价 <span class="req">*</span></div><input type="number" id="h-cost" placeholder="13.756" step="0.001"></div>
+    </div>
+    <div class="form-group"><div class="form-label">当前价格</div><input type="number" id="h-price" placeholder="13.800" step="0.001"></div>
+    <div class="form-group"><div class="form-label">买入理由（故事）</div><textarea id="h-story" placeholder="为什么买这只股票..." rows="3"></textarea></div>
+    <div class="form-group"><div class="form-label">买入日期</div><input type="date" id="h-date"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="addHolding()">确认添加</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-add-holding')">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-add-trade">
+  <div class="modal">
+    <div class="modal-title">新增交易记录</div>
+    <div class="grid2">
+      <div class="form-group"><div class="form-label">股票名称 <span class="req">*</span></div><input type="text" id="t-name" placeholder="例：中国国航"></div>
+      <div class="form-group"><div class="form-label">操作类型</div>
+        <select id="t-type">
+          <option value="buy">买入</option>
+          <option value="sell">卖出</option>
+          <option value="watch">观察</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="form-group"><div class="form-label">操作日期</div><input type="date" id="t-date"></div>
+      <div class="form-group"><div class="form-label">价格</div><input type="number" id="t-price" placeholder="7.20" step="0.001"></div>
+    </div>
+    <div class="form-group"><div class="form-label">买入理由 / 故事 <span class="req">*</span></div><textarea id="t-reason" placeholder="为什么做这个操作？依据什么信号？..." rows="3"></textarea></div>
+    <div class="form-group"><div class="form-label">预期目标</div><input type="text" id="t-target" placeholder="例：涨到8.5出，或者等涨势变缓再出"></div>
+    <div class="form-group"><div class="form-label">止损条件</div><input type="text" id="t-stoploss" placeholder="例：跌破6.5或故事逻辑改变立刻离场"></div>
+    <div class="divider"></div>
+    <div class="form-group"><div class="form-label">事后复盘结果</div>
+      <select id="t-result">
+        <option value="">未复盘</option>
+        <option value="win">盈利</option>
+        <option value="loss">亏损</option>
+        <option value="flat">持平</option>
+      </select>
+    </div>
+    <div class="grid2">
+      <div class="form-group"><div class="form-label">实际盈亏%</div><input type="number" id="t-pnl" placeholder="+5.2 或 -3.1" step="0.1"></div>
+      <div class="form-group"><div class="form-label">出场价格</div><input type="number" id="t-exit" placeholder="7.65" step="0.001"></div>
+    </div>
+    <div class="form-group"><div class="form-label">复盘总结</div><textarea id="t-review" placeholder="判断哪里准了，哪里错了，下次怎么改进..." rows="3"></textarea></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="addTrade()">保存记录</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-add-trade')">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-signal">
+  <div class="modal">
+    <div class="modal-title" id="signal-modal-title">添加信号</div>
+    <input type="hidden" id="signal-type">
+    <div class="form-group"><div class="form-label">标题 <span class="req">*</span></div><input type="text" id="sig-title" placeholder="一句话概括"></div>
+    <div class="form-group"><div class="form-label">详细说明</div><textarea id="sig-desc" placeholder="具体发生了什么，涉及哪只股票，犯了什么规则..." rows="4"></textarea></div>
+    <div class="form-group"><div class="form-label">日期</div><input type="date" id="sig-date"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="addSignal()">保存</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-signal')">取消</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-update-holding">
+  <div class="modal">
+    <div class="modal-title">更新持仓价格</div>
+    <input type="hidden" id="uh-idx">
+    <div class="form-group"><div class="form-label">股票</div><input type="text" id="uh-name" disabled></div>
+    <div class="form-group"><div class="form-label">当前价格</div><input type="number" id="uh-price" step="0.001"></div>
+    <div class="form-group"><div class="form-label">备注（可选）</div><input type="text" id="uh-note" placeholder="今日异动原因、观察要点..."></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="updateHoldingPrice()">更新</button>
+      <button class="btn btn-danger btn-sm" onclick="removeHolding()">删除持仓</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-update-holding')">取消</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const KEY = 'stock_journal_v1';
+
+function load() {
+  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; }
+}
+function save(data) {
+  localStorage.setItem(KEY, JSON.stringify(data));
+}
+function getData() {
+  const d = load();
+  if (!d.holdings) d.holdings = [];
+  if (!d.trades) d.trades = [];
+  if (!d.signals) d.signals = [];
+  if (!d.today) d.today = {};
+  if (!d.market) d.market = {};
+  return d;
+}
+
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  $('panel-' + id).classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'holdings') renderHoldings();
+  if (id === 'trades') renderTrades();
+  if (id === 'signals') renderSignals();
+  if (id === 'stats') renderStats();
+}
+
+function openModal(id) {
+  const today = new Date().toISOString().slice(0,10);
+  if (id === 'modal-add-holding') $('h-date').value = today;
+  if (id === 'modal-add-trade') $('t-date').value = today;
+  $(id).classList.add('open');
+}
+function closeModal(id) { $(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+// DATE
+function initDate() {
+  const d = new Date();
+  const str = d.toLocaleDateString('zh-CN', { year:'numeric', month:'long', day:'numeric', weekday:'long' });
+  $('nav-date').textContent = str;
+  $('today-date-sub').textContent = str;
+}
+
+// TODAY
+function saveTodayNote() {
+  const d = getData();
+  const key = new Date().toISOString().slice(0,10);
+  d.today[key] = d.today[key] || {};
+  d.today[key].watchlist = $('today-watchlist').value;
+  d.today[key].action = $('today-action').value;
+  d.today[key].review = $('today-review').value;
+  d.today[key].tomorrow = $('today-tomorrow').value;
+  d.today[key].mood = $('mood').value;
+  save(d);
+}
+function saveTodayFull() {
+  saveTodayNote();
+  saveMarket();
+  showToast('今日复盘已保存');
+}
+function saveMarket() {
+  const d = getData();
+  const key = new Date().toISOString().slice(0,10);
+  d.market[key] = {
+    sh: $('idx-sh').value,
+    sz: $('idx-sz').value,
+    cy: $('idx-cy').value,
+    chg: $('idx-chg').value
+  };
+  save(d);
+}
+function loadToday() {
+  const d = getData();
+  const key = new Date().toISOString().slice(0,10);
+  const t = d.today[key] || {};
+  const m = d.market[key] || {};
+  if (t.watchlist) $('today-watchlist').value = t.watchlist;
+  if (t.action) $('today-action').value = t.action;
+  if (t.review) $('today-review').value = t.review;
+  if (t.tomorrow) $('today-tomorrow').value = t.tomorrow;
+  if (t.mood) { $('mood').value = t.mood; $('mood-val').textContent = t.mood; }
+  if (m.sh) $('idx-sh').value = m.sh;
+  if (m.sz) $('idx-sz').value = m.sz;
+  if (m.cy) $('idx-cy').value = m.cy;
+  if (m.chg) $('idx-chg').value = m.chg;
+}
+
+// HOLDINGS
+function addHolding() {
+  const name = $('h-name').value.trim();
+  const qty = parseFloat($('h-qty').value);
+  const cost = parseFloat($('h-cost').value);
+  if (!name || !qty || !cost) { showToast('请填写必填项', true); return; }
+  const d = getData();
+  d.holdings.push({
+    name, code: $('h-code').value.trim(),
+    qty, cost,
+    price: parseFloat($('h-price').value) || cost,
+    story: $('h-story').value.trim(),
+    date: $('h-date').value,
+    note: ''
+  });
+  save(d);
+  closeModal('modal-add-holding');
+  ['h-name','h-code','h-qty','h-cost','h-price','h-story'].forEach(id => $(id).value = '');
+  renderHoldings();
+  showToast('持仓已添加');
+}
+
+function renderHoldings() {
+  const d = getData();
+  const list = $('holdings-list');
+  if (!d.holdings.length) {
+    list.innerHTML = '<div class="empty"><div class="empty-icon">—</div>暂无持仓，点击右上角添加</div>';
+    $('hs-total').textContent = '--';
+    $('hs-pnl').textContent = '--';
+    $('hs-pnlpct').textContent = '--';
+    return;
+  }
+  let totalMV = 0, totalCost = 0;
+  list.innerHTML = `
+    <div class="holding-header">
+      <div>股票</div><div style="text-align:right">现价/成本</div>
+      <div style="text-align:right">盈亏</div><div style="text-align:right">仓位</div>
+      <div style="text-align:right">操作</div>
+    </div>`;
+  const totalVal = d.holdings.reduce((s,h) => s + h.price * h.qty, 0);
+  d.holdings.forEach((h, i) => {
+    const mv = h.price * h.qty;
+    const pnl = (h.price - h.cost) * h.qty;
+    const pnlPct = ((h.price - h.cost) / h.cost * 100);
+    const pos = totalVal > 0 ? (mv / totalVal * 100) : 0;
+    totalMV += mv; totalCost += h.cost * h.qty;
+    const cls = pnl >= 0 ? 'up' : 'down';
+    const sign = pnl >= 0 ? '+' : '';
+    list.innerHTML += `
+      <div class="holding-row">
+        <div>
+          <div style="font-weight:500;">${h.name}</div>
+          <div style="font-size:11px;color:var(--text3);">${h.code || ''} · ${h.qty}股</div>
+        </div>
+        <div style="text-align:right;">
+          <div>${h.price.toFixed(3)}</div>
+          <div style="font-size:11px;color:var(--text3);">${h.cost.toFixed(3)}</div>
+        </div>
+        <div style="text-align:right;" class="${cls}">
+          <div>${sign}${pnl.toFixed(0)}</div>
+          <div style="font-size:11px;">${sign}${pnlPct.toFixed(2)}%</div>
+        </div>
+        <div style="text-align:right;font-size:12px;color:var(--text2);">${pos.toFixed(1)}%</div>
+        <div style="text-align:right;">
+          <button class="btn btn-ghost btn-sm" onclick="openUpdateHolding(${i})">更新</button>
+        </div>
+      </div>`;
+  });
+  const totalPnl = totalMV - totalCost;
+  const totalPnlPct = totalCost > 0 ? (totalPnl / totalCost * 100) : 0;
+  $('hs-total').textContent = '¥' + totalMV.toLocaleString('zh-CN', {maximumFractionDigits:0});
+  $('hs-pnl').textContent = (totalPnl >= 0 ? '+' : '') + totalPnl.toFixed(0);
+  $('hs-pnl').className = 'stat-val ' + (totalPnl >= 0 ? 'up' : 'down');
+  $('hs-pnlpct').textContent = (totalPnlPct >= 0 ? '+' : '') + totalPnlPct.toFixed(2) + '%';
+  $('hs-pnlpct').className = 'stat-val ' + (totalPnlPct >= 0 ? 'up' : 'down');
+}
+
+function openUpdateHolding(i) {
+  const d = getData();
+  const h = d.holdings[i];
+  $('uh-idx').value = i;
+  $('uh-name').value = h.name;
+  $('uh-price').value = h.price;
+  $('uh-note').value = h.note || '';
+  openModal('modal-update-holding');
+}
+function updateHoldingPrice() {
+  const d = getData();
+  const i = parseInt($('uh-idx').value);
+  d.holdings[i].price = parseFloat($('uh-price').value) || d.holdings[i].price;
+  d.holdings[i].note = $('uh-note').value;
+  save(d); closeModal('modal-update-holding');
+  renderHoldings(); showToast('价格已更新');
+}
+function removeHolding() {
+  if (!confirm('确认删除这条持仓记录？')) return;
+  const d = getData();
+  const i = parseInt($('uh-idx').value);
+  d.holdings.splice(i, 1);
+  save(d); closeModal('modal-update-holding');
+  renderHoldings(); showToast('已删除');
+}
+
+// CHECKLIST
+function toggleCheck(item) {
+  const cb = item.querySelector('input[type=checkbox]');
+  cb.checked = !cb.checked;
+  item.querySelector('.check-text').classList.toggle('done', cb.checked);
+  updateCheckScore();
+}
+function updateCheckScore() {
+  const all = document.querySelectorAll('#panel-checklist input[type=checkbox]');
+  const checked = document.querySelectorAll('#panel-checklist input[type=checkbox]:checked');
+  const n = checked.length, t = all.length;
+  $('cl-score').textContent = n + ' / ' + t;
+  const v = $('cl-verdict');
+  if (n === t) { v.textContent = '全部满足，可以考虑入场'; v.style.color = 'var(--green)'; }
+  else if (n >= 8) { v.textContent = '接近满足，谨慎考虑'; v.style.color = 'var(--amber)'; }
+  else if (n >= 5) { v.textContent = '条件不足，继续等待'; v.style.color = 'var(--red)'; }
+  else { v.textContent = '尚未满足入场条件'; v.style.color = 'var(--text3)'; }
+}
+function resetChecklist() {
+  document.querySelectorAll('#panel-checklist input[type=checkbox]').forEach(cb => { cb.checked = false; });
+  document.querySelectorAll('#panel-checklist .check-text').forEach(t => t.classList.remove('done'));
+  $('cl-stock').value = '';
+  updateCheckScore();
+}
+function saveChecklistRecord() {
+  const stock = $('cl-stock').value.trim();
+  if (!stock) { showToast('请填写股票名称', true); return; }
+  const checked = document.querySelectorAll('#panel-checklist input[type=checkbox]:checked').length;
+  const total = document.querySelectorAll('#panel-checklist input[type=checkbox]').length;
+  const d = getData();
+  if (!d.checklist_records) d.checklist_records = [];
+  d.checklist_records.push({ stock, score: checked + '/' + total, date: new Date().toISOString().slice(0,10) });
+  save(d);
+  showToast('检查记录已保存');
+}
+
+// TRADES
+function addTrade() {
+  const name = $('t-name').value.trim();
+  const reason = $('t-reason').value.trim();
+  if (!name || !reason) { showToast('请填写必填项', true); return; }
+  const d = getData();
+  d.trades.unshift({
+    name, type: $('t-type').value,
+    date: $('t-date').value,
+    price: parseFloat($('t-price').value) || null,
+    reason, target: $('t-target').value,
+    stoploss: $('t-stoploss').value,
+    result: $('t-result').value,
+    pnl: parseFloat($('t-pnl').value) || null,
+    exit: parseFloat($('t-exit').value) || null,
+    review: $('t-review').value
+  });
+  save(d);
+  closeModal('modal-add-trade');
+  ['t-name','t-price','t-reason','t-target','t-stoploss','t-pnl','t-exit','t-review'].forEach(id => $(id).value = '');
+  $('t-type').value = 'buy'; $('t-result').value = '';
+  renderTrades(); showToast('记录已保存');
+}
+
+function renderTrades() {
+  const d = getData();
+  const list = $('trades-list');
+  if (!d.trades.length) {
+    list.innerHTML = '<div class="empty"><div class="empty-icon">—</div>暂无交易记录，点击右上角添加</div>';
+    return;
+  }
+  const typeLabel = { buy:'买入', sell:'卖出', watch:'观察' };
+  const typeTag = { buy:'tag-amber', sell:'tag-gray', watch:'tag-gray' };
+  const resultTag = { win:'tag-green', loss:'tag-red', flat:'tag-gray', '':'tag-gray' };
+  const resultLabel = { win:'盈利', loss:'亏损', flat:'持平', '':'未复盘' };
+  list.innerHTML = d.trades.map((t, i) => `
+    <div class="trade-item">
+      <div class="trade-header">
+        <span class="trade-name">${t.name}</span>
+        <span class="tag ${typeTag[t.type]}">${typeLabel[t.type]}</span>
+        ${t.result ? `<span class="tag ${resultTag[t.result]}">${resultLabel[t.result]}${t.pnl !== null ? ' ' + (t.pnl >= 0 ? '+' : '') + t.pnl + '%' : ''}</span>` : '<span class="tag tag-gray">待复盘</span>'}
+        <span class="trade-meta">${t.date || ''} ${t.price ? '@ ' + t.price : ''}</span>
+      </div>
+      <div class="trade-body">
+        <strong>买入理由：</strong>${t.reason}<br>
+        ${t.target ? `<strong>目标：</strong>${t.target}<br>` : ''}
+        ${t.stoploss ? `<strong>止损：</strong>${t.stoploss}` : ''}
+      </div>
+      ${t.review ? `<div class="trade-result"><div class="trade-result-item"><span>复盘：</span>${t.review}</div></div>` : ''}
+      <div class="trade-actions">
+        <button class="btn btn-ghost btn-sm" onclick="editTradeResult(${i})">更新复盘</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteTrade(${i})">删除</button>
+      </div>
+    </div>`).join('');
+}
+
+function editTradeResult(i) {
+  const d = getData();
+  const t = d.trades[i];
+  const result = prompt('结果（win/loss/flat）:', t.result || '');
+  if (result === null) return;
+  const pnl = prompt('盈亏%（如+5.2或-3.1）:', t.pnl || '');
+  const review = prompt('复盘总结:', t.review || '');
+  d.trades[i].result = result;
+  d.trades[i].pnl = parseFloat(pnl) || null;
+  d.trades[i].review = review;
+  save(d); renderTrades(); showToast('复盘已更新');
+}
+
+function deleteTrade(i) {
+  if (!confirm('确认删除？')) return;
+  const d = getData();
+  d.trades.splice(i, 1);
+  save(d); renderTrades(); showToast('已删除');
+}
+
+// SIGNALS
+function openSignalModal(type) {
+  $('signal-type').value = type;
+  $('signal-modal-title').textContent = type === 'red' ? '添加红色信号·重大错误' : '添加绿色信号·正确判断';
+  $('sig-date').value = new Date().toISOString().slice(0,10);
+  openModal('modal-signal');
+}
+function addSignal() {
+  const title = $('sig-title').value.trim();
+  if (!title) { showToast('请填写标题', true); return; }
+  const d = getData();
+  d.signals.unshift({
+    type: $('signal-type').value,
+    title, desc: $('sig-desc').value,
+    date: $('sig-date').value
+  });
+  save(d);
+  closeModal('modal-signal');
+  ['sig-title','sig-desc'].forEach(id => $(id).value = '');
+  renderSignals(); showToast('信号已记录');
+}
+function renderSignals() {
+  const d = getData();
+  const reds = d.signals.filter(s => s.type === 'red');
+  const greens = d.signals.filter(s => s.type === 'green');
+  $('signals-red').innerHTML = reds.length ? reds.map((s,i) => `
+    <div class="signal-item signal-red">
+      <div style="flex:1;">
+        <div class="signal-title">${s.title}</div>
+        ${s.desc ? `<div class="signal-desc">${s.desc}</div>` : ''}
+        <div class="signal-date">${s.date}</div>
+      </div>
+    </div>`).join('') : '<div class="empty" style="padding:24px 0;">暂无红色信号</div>';
+  $('signals-green').innerHTML = greens.length ? greens.map((s,i) => `
+    <div class="signal-item signal-green">
+      <div style="flex:1;">
+        <div class="signal-title">${s.title}</div>
+        ${s.desc ? `<div class="signal-desc">${s.desc}</div>` : ''}
+        <div class="signal-date">${s.date}</div>
+      </div>
+    </div>`).join('') : '<div class="empty" style="padding:24px 0;">暂无绿色信号</div>';
+}
+
+// STATS
+function renderStats() {
+  const d = getData();
+  const completed = d.trades.filter(t => t.result && t.result !== '');
+  const wins = completed.filter(t => t.result === 'win');
+  const losses = completed.filter(t => t.result === 'loss');
+  $('st-total').textContent = d.trades.length;
+  $('st-win').textContent = wins.length;
+  $('st-loss').textContent = losses.length;
+  $('st-winrate').textContent = completed.length ? Math.round(wins.length / completed.length * 100) + '%' : '--%';
+  const avgWin = wins.filter(t => t.pnl !== null).reduce((s,t) => s + t.pnl, 0) / (wins.filter(t => t.pnl !== null).length || 1);
+  const avgLoss = losses.filter(t => t.pnl !== null).reduce((s,t) => s + t.pnl, 0) / (losses.filter(t => t.pnl !== null).length || 1);
+  $('st-avgwin').textContent = wins.length ? '+' + avgWin.toFixed(1) + '%' : '--';
+  $('st-avgloss').textContent = losses.length ? avgLoss.toFixed(1) + '%' : '--';
+  const breakdown = $('st-breakdown');
+  if (!completed.length) { breakdown.innerHTML = '<div class="empty">暂无已复盘的交易记录</div>'; return; }
+  const byStock = {};
+  completed.forEach(t => {
+    if (!byStock[t.name]) byStock[t.name] = [];
+    byStock[t.name].push(t);
+  });
+  breakdown.innerHTML = Object.entries(byStock).map(([name, trades]) => {
+    const w = trades.filter(t => t.result === 'win').length;
+    const l = trades.filter(t => t.result === 'loss').length;
+    const pnls = trades.filter(t => t.pnl !== null).map(t => t.pnl);
+    const totalPnl = pnls.reduce((s,p) => s + p, 0);
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;">
+      <span style="font-weight:500;">${name}</span>
+      <span style="color:var(--text3);">${trades.length}次 · ${w}赢${l}负</span>
+      <span class="${totalPnl >= 0 ? 'up' : 'down'}">${totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(1)}%</span>
+    </div>`;
+  }).join('');
+}
+
+// TOAST
+function showToast(msg, isErr) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = `position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+    background:${isErr ? 'var(--red-bg)' : 'var(--bg4)'};
+    color:${isErr ? 'var(--red)' : 'var(--text)'};
+    border:1px solid ${isErr ? 'var(--red)' : 'var(--border2)'};
+    padding:10px 20px;border-radius:8px;font-size:13px;
+    z-index:9999;animation:fadeIn 0.2s ease;`;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2200);
+}
+
+// INIT
+initDate();
+loadToday();
+</script>
+</body>
+</html>
