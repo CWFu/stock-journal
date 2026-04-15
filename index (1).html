@@ -5,483 +5,422 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>股市复盘笔记</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400;500&family=Playfair+Display:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=DM+Sans:wght@300;400;500&family=Lora:wght@400;600&display=swap">
 <style>
-:root {
-  --bg: #0f0f0f;
-  --bg2: #161616;
-  --bg3: #1e1e1e;
-  --bg4: #252525;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --text: #e8e6e0;
-  --text2: #9a9690;
-  --text3: #5a5854;
-  --accent: #c8a96e;
-  --accent2: #8a6f42;
-  --green: #4a9e6b;
-  --green-bg: rgba(74,158,107,0.12);
-  --red: #c05454;
-  --red-bg: rgba(192,84,84,0.12);
-  --amber: #c8943a;
-  --amber-bg: rgba(200,148,58,0.12);
-  --serif: 'Noto Serif SC', serif;
-  --sans: 'Noto Sans SC', sans-serif;
-  --radius: 10px;
-  --radius-sm: 6px;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  font-weight: 300;
-  min-height: 100vh;
-  font-size: 14px;
-  line-height: 1.6;
-}
+:root{--bg:#0f0f0f;--bg2:#161616;--bg3:#1e1e1e;--bg4:#252525;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--text:#e8e6e0;--text2:#9a9690;--text3:#5a5854;--accent:#c8a96e;--accent2:#8a6f42;--green:#4a9e6b;--green-bg:rgba(74,158,107,0.12);--red:#c05454;--red-bg:rgba(192,84,84,0.12);--amber:#c8943a;--amber-bg:rgba(200,148,58,0.12);--blue:#4a7fbd;--blue-bg:rgba(74,127,189,0.12);--serif:'Noto Serif SC',serif;--sans:'Noto Sans SC',sans-serif;--r:10px;--rs:6px;--font-body:var(--sans);--font-brand:var(--serif);}
 
-/* NAV */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(15,15,15,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 24px;
-  display: flex; align-items: center; gap: 0;
-  height: 52px;
+/* ── THEME: FOREST (唯一深色保留) ── */
+[data-theme="forest"]{
+  --bg:#0a110d;--bg2:#101a12;--bg3:#162018;--bg4:#1e291f;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.11);
+  --text:#d4e8d4;--text2:#7a9e7a;--text3:#3d5c3d;
+  --accent:#6dbd6d;--accent2:#4a8a4a;
+  --green:#6dbd6d;--green-bg:rgba(109,189,109,0.12);
+  --red:#d46060;--red-bg:rgba(212,96,96,0.12);
+  --amber:#c8a030;--amber-bg:rgba(200,160,48,0.12);
+  --blue:#5090c0;--blue-bg:rgba(80,144,192,0.12);
 }
-.nav-brand {
-  font-family: var(--serif);
-  font-size: 15px;
-  color: var(--accent);
-  letter-spacing: 0.05em;
-  margin-right: 32px;
-  white-space: nowrap;
-}
-.nav-tabs { display: flex; gap: 0; flex: 1; overflow-x: auto; }
-.nav-tab {
-  padding: 0 16px;
-  height: 52px;
-  display: flex; align-items: center;
-  font-size: 13px;
-  color: var(--text3);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
-  white-space: nowrap;
-  background: none; border-top: none; border-left: none; border-right: none;
-  font-family: var(--sans);
-  font-weight: 400;
-}
-.nav-tab:hover { color: var(--text2); }
-.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-.nav-date {
-  font-size: 12px; color: var(--text3);
-  margin-left: auto; white-space: nowrap;
-  padding-left: 16px;
-}
+[data-theme="forest"] nav{background:rgba(10,17,13,0.95);}
 
-/* MAIN */
-main { max-width: 960px; margin: 0 auto; padding: 28px 20px 80px; }
+/* ── THEME: PURE (纯白简约) · DM Sans ── */
+[data-theme="pure"]{
+  --bg:#ffffff;--bg2:#f8f8f8;--bg3:#f0f0f0;--bg4:#e8e8e8;
+  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.13);
+  --text:#111111;--text2:#555555;--text3:#aaaaaa;
+  --accent:#1a1a1a;--accent2:#444444;
+  --green:#1a7a40;--green-bg:rgba(26,122,64,0.08);
+  --red:#c02020;--red-bg:rgba(192,32,32,0.08);
+  --amber:#b06010;--amber-bg:rgba(176,96,16,0.08);
+  --blue:#1a40a0;--blue-bg:rgba(26,64,160,0.08);
+  --font-body:'DM Sans',sans-serif;--font-brand:'DM Sans',sans-serif;
+  --r:6px;--rs:4px;
+}
+[data-theme="pure"] nav{background:rgba(255,255,255,0.96);border-bottom:1px solid rgba(0,0,0,0.08);}
+[data-theme="pure"] .nb{letter-spacing:0;font-family:'DM Sans',sans-serif;font-weight:500;}
+[data-theme="pure"] .pt{font-family:'DM Sans',sans-serif;font-weight:500;}
 
-/* PANELS */
-.panel { display: none; }
-.panel.active { display: block; }
+/* ── THEME: PARCHMENT (羊皮纸) · Lora ── */
+[data-theme="parchment"]{
+  --bg:#fdf8f0;--bg2:#f5ede0;--bg3:#ece0d0;--bg4:#e0d0bc;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
+  --text:#2a1e10;--text2:#6a5438;--text3:#a88c6a;
+  --accent:#7a4a18;--accent2:#5a3408;
+  --green:#2a6a30;--green-bg:rgba(42,106,48,0.1);
+  --red:#9a2828;--red-bg:rgba(154,40,40,0.1);
+  --amber:#8a5010;--amber-bg:rgba(138,80,16,0.1);
+  --blue:#2a4880;--blue-bg:rgba(42,72,128,0.1);
+  --font-body:'Lora',serif;--font-brand:'Lora',serif;
+}
+[data-theme="parchment"] nav{background:rgba(253,248,240,0.96);}
+[data-theme="parchment"] .pt{font-family:'Lora',serif;font-weight:400;}
+[data-theme="parchment"] .nb{font-family:'Lora',serif;}
 
-/* PAGE HEADER */
-.page-header {
-  margin-bottom: 28px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
+/* ── THEME: EDITORIAL (编辑室) · Playfair + Source Serif ── */
+[data-theme="editorial"]{
+  --bg:#f7f4ef;--bg2:#eeeae2;--bg3:#e4dfd4;--bg4:#d8d0c4;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.16);
+  --text:#1a1614;--text2:#5a5048;--text3:#9a9088;
+  --accent:#c0390c;--accent2:#8c2808;
+  --green:#2a6830;--green-bg:rgba(42,104,48,0.1);
+  --red:#c0390c;--red-bg:rgba(192,57,12,0.1);
+  --amber:#b05808;--amber-bg:rgba(176,88,8,0.1);
+  --blue:#1e3e7a;--blue-bg:rgba(30,62,122,0.1);
+  --font-body:'Source Serif 4',serif;--font-brand:'Playfair Display',serif;
 }
-.page-title {
-  font-family: var(--serif);
-  font-size: 22px;
-  color: var(--text);
-  font-weight: 400;
-  margin-bottom: 4px;
-}
-.page-sub { font-size: 12px; color: var(--text3); }
+[data-theme="editorial"] nav{background:rgba(247,244,239,0.96);}
+[data-theme="editorial"] .pt{font-family:'Playfair Display',serif;font-weight:400;}
+[data-theme="editorial"] .nb{font-family:'Playfair Display',serif;}
+[data-theme="editorial"] .ct{letter-spacing:.15em;}
 
-/* CARDS */
-.card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
+/* ── THEME: CYBER (赛博朋克) · IBM Plex Mono ── */
+[data-theme="cyber"]{
+  --bg:#f0f4f0;--bg2:#e4eee4;--bg3:#d8e8d8;--bg4:#c8dcc8;
+  --border:rgba(0,80,0,0.15);--border2:rgba(0,80,0,0.25);
+  --text:#002800;--text2:#3a6a3a;--text3:#78a878;
+  --accent:#00aa00;--accent2:#007800;
+  --green:#00aa00;--green-bg:rgba(0,170,0,0.1);
+  --red:#cc2200;--red-bg:rgba(204,34,0,0.1);
+  --amber:#aa7700;--amber-bg:rgba(170,119,0,0.1);
+  --blue:#006688;--blue-bg:rgba(0,102,136,0.1);
+  --font-body:'IBM Plex Mono',monospace;--font-brand:'IBM Plex Mono',monospace;
+  --r:2px;--rs:2px;
 }
-.card-title {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text3);
-  margin-bottom: 16px;
-  font-weight: 500;
-}
-.card-title span {
-  color: var(--accent);
-}
+[data-theme="cyber"] nav{background:rgba(240,244,240,0.97);border-bottom:1px solid rgba(0,170,0,0.3);}
+[data-theme="cyber"] .nb{font-family:'IBM Plex Mono',monospace;font-weight:500;letter-spacing:.08em;}
+[data-theme="cyber"] .pt{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:18px;}
+[data-theme="cyber"] .ct{font-family:'IBM Plex Mono',monospace;letter-spacing:.2em;}
+[data-theme="cyber"] .card{border-radius:2px;}
+[data-theme="cyber"] .btn{border-radius:2px;}
 
-/* GRID */
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-@media(max-width:640px) {
-  .grid2 { grid-template-columns: 1fr; }
-  .grid3 { grid-template-columns: 1fr 1fr; }
+/* ── THEME: STONE (水泥灰) · DM Sans ── */
+[data-theme="stone"]{
+  --bg:#f2f0ee;--bg2:#eae8e4;--bg3:#dedad4;--bg4:#d0ccc4;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.15);
+  --text:#1e1c1a;--text2:#5e5c58;--text3:#9e9c98;
+  --accent:#4a4640;--accent2:#2a2820;
+  --green:#3a7040;--green-bg:rgba(58,112,64,0.1);
+  --red:#a03030;--red-bg:rgba(160,48,48,0.1);
+  --amber:#906020;--amber-bg:rgba(144,96,32,0.1);
+  --blue:#304870;--blue-bg:rgba(48,72,112,0.1);
+  --font-body:'DM Sans',sans-serif;--font-brand:'DM Sans',sans-serif;
 }
+[data-theme="stone"] nav{background:rgba(242,240,238,0.96);}
+[data-theme="stone"] .nb{font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:.02em;}
+[data-theme="stone"] .pt{font-family:'DM Sans',sans-serif;font-weight:400;}
 
-/* STAT */
-.stat { padding: 16px; background: var(--bg3); border-radius: var(--radius-sm); }
-.stat-val { font-size: 24px; font-weight: 500; color: var(--text); line-height: 1; margin-bottom: 6px; }
-.stat-val.up { color: var(--green); }
-.stat-val.down { color: var(--red); }
-.stat-lbl { font-size: 11px; color: var(--text3); }
+/* ── THEME: SAKURA (樱花粉) · Noto Serif ── */
+[data-theme="sakura"]{
+  --bg:#fdf6f8;--bg2:#f8eef2;--bg3:#f0e4ea;--bg4:#e8d8e0;
+  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.12);
+  --text:#2a1820;--text2:#6a4858;--text3:#a88898;
+  --accent:#c0506a;--accent2:#8c3048;
+  --green:#3a7050;--green-bg:rgba(58,112,80,0.1);
+  --red:#c0506a;--red-bg:rgba(192,80,106,0.1);
+  --amber:#a07030;--amber-bg:rgba(160,112,48,0.1);
+  --blue:#4060a0;--blue-bg:rgba(64,96,160,0.1);
+  --font-body:var(--serif);--font-brand:var(--serif);
+}
+[data-theme="sakura"] nav{background:rgba(253,246,248,0.96);}
 
-/* FORM */
-.form-group { margin-bottom: 16px; }
-.form-label { font-size: 12px; color: var(--text2); margin-bottom: 6px; display: block; }
-.form-label .req { color: var(--red); margin-left: 2px; }
-input[type=text], input[type=number], input[type=date], select, textarea {
-  width: 100%;
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius-sm);
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 300;
-  padding: 9px 12px;
-  outline: none;
-  transition: border-color 0.2s;
-  -webkit-appearance: none;
-}
-input:focus, select:focus, textarea:focus { border-color: var(--accent2); }
-textarea { resize: vertical; min-height: 80px; }
-select option { background: var(--bg3); }
+/* ── apply font-body to body element ── */
+[data-theme] body,[data-theme="pure"] body,[data-theme="parchment"] body,[data-theme="editorial"] body,[data-theme="cyber"] body,[data-theme="stone"] body{font-family:var(--font-body,var(--sans));}
 
-/* BUTTONS */
-.btn {
-  padding: 9px 20px;
-  border-radius: var(--radius-sm);
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: opacity 0.15s, transform 0.1s;
-  border: none;
-}
-.btn:active { transform: scale(0.97); }
-.btn-primary { background: var(--accent); color: #1a1208; }
-.btn-primary:hover { opacity: 0.88; }
-.btn-ghost {
-  background: transparent;
-  border: 1px solid var(--border2);
-  color: var(--text2);
-}
-.btn-ghost:hover { border-color: var(--accent2); color: var(--accent); }
-.btn-danger { background: var(--red-bg); border: 1px solid var(--red); color: var(--red); }
-.btn-sm { padding: 5px 12px; font-size: 12px; }
-.btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;min-height:100vh;font-size:14px;line-height:1.6;}
+nav{position:sticky;top:0;z-index:100;background:rgba(15,15,15,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;height:52px;}
+.nb{font-family:var(--serif);font-size:15px;color:var(--accent);letter-spacing:.05em;margin-right:24px;white-space:nowrap;}
+.nt{display:flex;flex:1;overflow-x:auto;}
+.nt button{padding:0 13px;height:52px;display:flex;align-items:center;font-size:13px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--sans);font-weight:400;}
+.nt button:hover{color:var(--text2);}
+.nt button.active{color:var(--accent);border-bottom-color:var(--accent);}
+.nd{font-size:12px;color:var(--text3);margin-left:auto;padding-left:10px;white-space:nowrap;}
+main{max-width:980px;margin:0 auto;padding:24px 18px 80px;}
+.panel{display:none;}.panel.active{display:block;animation:fi .2s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.ph{margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.pt{font-family:var(--serif);font-size:22px;color:var(--text);font-weight:400;margin-bottom:3px;}
+.ps{font-size:12px;color:var(--text3);}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:13px;}
+.ct{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:13px;font-weight:500;}
+.ct span{color:var(--accent);}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:700px){.g2{grid-template-columns:1fr}.g3{grid-template-columns:1fr 1fr}.g4{grid-template-columns:1fr 1fr}}
+.stat{padding:13px;background:var(--bg3);border-radius:var(--rs);}
+.sv{font-size:21px;font-weight:500;color:var(--text);line-height:1;margin-bottom:4px;}
+.sv.up{color:var(--green)}.sv.down{color:var(--red)}
+.sl{font-size:11px;color:var(--text3);}
+.fg{margin-bottom:13px;}
+.fl{font-size:12px;color:var(--text2);margin-bottom:5px;display:block;}
+.fl .req{color:var(--red);margin-left:2px;}
+input[type=text],input[type=number],input[type=date],select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--rs);color:var(--text);font-family:var(--sans);font-size:13px;font-weight:300;padding:9px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--accent2);}
+textarea{resize:vertical;min-height:68px;}
+select option{background:var(--bg3);}
+.btn{padding:8px 17px;border-radius:var(--rs);font-family:var(--sans);font-size:13px;font-weight:400;cursor:pointer;transition:opacity .15s,transform .1s;border:none;}
+.btn:active{transform:scale(.97)}
+.bp{background:var(--accent);color:#1a1208;}.bp:hover{opacity:.88}
+.bg{background:transparent;border:1px solid var(--border2);color:var(--text2);}.bg:hover{border-color:var(--accent2);color:var(--accent);}
+.bd{background:var(--red-bg);border:1px solid var(--red);color:var(--red);}
+.bs{padding:5px 11px;font-size:12px;}
+.br{display:flex;gap:9px;flex-wrap:wrap;}
+.tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:20px;font-weight:500;}
+.tg{background:var(--green-bg);color:var(--green);}
+.tr{background:var(--red-bg);color:var(--red);}
+.ta{background:var(--amber-bg);color:var(--amber);}
+.tgr{background:var(--bg4);color:var(--text2);}
+.tb{background:var(--blue-bg);color:var(--blue);}
+.ri{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.ri:last-child{border-bottom:none;}
+.rn{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;margin-top:1px;}
+.rb{flex:1;}
+.rname{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.rdesc{font-size:12px;color:var(--text2);line-height:1.55;}
+.reg{font-size:11px;color:var(--text3);margin-top:3px;font-style:italic;}
+.ci{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:var(--rs);background:var(--bg3);margin-bottom:6px;transition:background .15s;cursor:pointer;}
+.ci:hover{background:var(--bg4);}
+.ci input[type=checkbox]{width:16px;height:16px;min-width:16px;margin-top:1px;cursor:pointer;accent-color:var(--accent);padding:0;}
+.ct2{font-size:13px;color:var(--text2);flex:1;user-select:none;}
+.ct2.done{text-decoration:line-through;color:var(--text3);}
+.sb{background:var(--bg3);border-radius:var(--rs);padding:15px;text-align:center;margin-top:13px;}
+.sn{font-size:28px;font-weight:500;color:var(--accent);}
+.sl2{font-size:12px;color:var(--text3);margin-top:2px;}
+.sv2{font-size:13px;font-weight:500;margin-top:7px;}
+.ti{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:15px 18px;margin-bottom:9px;transition:border-color .2s;}
+.ti:hover{border-color:var(--border2);}
+.th{display:flex;align-items:center;gap:9px;margin-bottom:9px;flex-wrap:wrap;}
+.tn{font-size:15px;font-weight:500;color:var(--text);}
+.tm{font-size:12px;color:var(--text3);}
+.tb2{font-size:13px;color:var(--text2);line-height:1.6;}
+.tb2 strong{color:var(--text);font-weight:500;}
+.ta2{display:flex;gap:7px;margin-top:9px;}
+.hr{display:grid;grid-template-columns:1fr 80px 80px 80px 80px;gap:11px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.hr:last-child{border-bottom:none;}
+.hh{display:grid;grid-template-columns:1fr 80px 80px 80px 80px;gap:11px;padding:6px 0 8px;border-bottom:1px solid var(--border2);font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;}
+@media(max-width:600px){.hr,.hh{grid-template-columns:1fr 70px 70px}.hr>*:nth-child(4),.hr>*:nth-child(5),.hh>*:nth-child(4),.hh>*:nth-child(5){display:none}}
+.si{display:flex;gap:13px;padding:13px;border-radius:var(--rs);margin-bottom:8px;border-left:3px solid;}
+.sr{background:var(--red-bg);border-color:var(--red);}
+.sg{background:var(--green-bg);border-color:var(--green);}
+.st{font-size:13px;font-weight:500;margin-bottom:2px;}
+.sr .st{color:var(--red)}.sg .st{color:var(--green)}
+.sd{font-size:12px;color:var(--text2);line-height:1.55;}
+.sdate{font-size:11px;color:var(--text3);margin-top:3px;}
+.pr{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border);}
+.pr:last-child{border-bottom:none;}
+.pd{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.pname{font-size:13px;font-weight:500;color:var(--text);}
+.pdesc{font-size:12px;color:var(--text2);line-height:1.5;margin-top:2px;}
+.empty{text-align:center;padding:40px 18px;color:var(--text3);font-size:13px;}
+.mo{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:18px;}
+.mo.open{display:flex;}
+.md{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:26px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;}
+.mdt{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--text);margin-bottom:20px;}
+.dv{height:1px;background:var(--border);margin:16px 0;}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
+.tg2{display:grid;grid-template-columns:1fr 1.5fr;gap:13px;}
+@media(max-width:680px){.tg2{grid-template-columns:1fr}}
+.mr{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px;}
+.pmb{margin-bottom:5px;}
+.pml{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:4px;}
+.pmbg{background:var(--bg4);border-radius:3px;height:7px;}
+.pmf{border-radius:3px;height:7px;transition:width .4s ease;}
+.dtq{font-size:13px;font-weight:500;color:var(--text);margin-bottom:9px;}
+.dto{display:flex;gap:7px;margin-bottom:7px;flex-wrap:wrap;}
+.dtb{padding:6px 13px;border-radius:var(--rs);font-size:12px;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:var(--sans);transition:all .15s;}
+.dtb:hover,.dtb.sel{background:var(--accent2);border-color:var(--accent);color:var(--accent);}
+.dtr{padding:11px;border-radius:var(--rs);font-size:13px;margin-top:9px;display:none;}
+.dtr.show{display:block;}
+.pw{margin-bottom:14px;}
+.pwt{font-size:12px;font-weight:500;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;}
+.ptask{display:flex;gap:9px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer;}
+.ptask:last-child{border-bottom:none;}
+.ptdot{width:6px;height:6px;border-radius:50%;background:var(--text3);flex-shrink:0;margin-top:6px;transition:background .2s;}
+.ptxt{font-size:13px;color:var(--text2);line-height:1.5;flex:1;}
+.hlr{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.hlr:last-child{border-bottom:none;}
+.hll{color:var(--text2);}
+.hls{font-weight:500;}
+.hok{color:var(--green)}.hwarn{color:var(--amber)}.hdanger{color:var(--red)}
+.pbi{padding:11px;background:var(--bg3);border-radius:var(--rs);margin-bottom:7px;}
+.pbs{font-size:13px;font-weight:500;color:var(--text);margin-bottom:5px;}
+.pbsc{display:flex;gap:7px;align-items:flex-start;margin-bottom:4px;font-size:12px;}
+.pbsc:last-child{margin-bottom:0;}
+.pbcond{color:var(--text3);min-width:58px;flex-shrink:0;}
+.pbact{color:var(--text2);flex:1;}
 
-/* TAGS */
-.tag {
-  display: inline-block;
-  font-size: 11px; padding: 2px 8px;
-  border-radius: 20px; font-weight: 500;
-}
-.tag-green { background: var(--green-bg); color: var(--green); }
-.tag-red { background: var(--red-bg); color: var(--red); }
-.tag-amber { background: var(--amber-bg); color: var(--amber); }
-.tag-gray { background: var(--bg4); color: var(--text2); }
+/* CALENDAR */
+.cal-wrap{user-select:none;}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.cal-nav{background:transparent;border:1px solid var(--border2);color:var(--text2);border-radius:var(--rs);padding:2px 8px;cursor:pointer;font-size:13px;font-family:var(--sans);line-height:1.6;}
+.cal-nav:hover{border-color:var(--accent2);color:var(--accent);}
+.cal-month{font-size:13px;font-weight:500;color:var(--text);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cal-dow{font-size:10px;color:var(--text3);text-align:center;padding:3px 0;letter-spacing:.03em;}
+.cal-day{height:28px;display:flex;align-items:center;justify-content:center;border-radius:5px;font-size:12px;color:var(--text3);cursor:default;position:relative;}
+.cal-day.has-entry{color:var(--text);cursor:pointer;}
+.cal-day.has-entry:hover{background:var(--bg4);}
+.cal-day.today{color:var(--accent);font-weight:500;}
+.cal-day.today::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--accent);}
+.cal-day.selected{background:var(--accent2)!important;color:var(--accent)!important;}
+.cal-dot{position:absolute;top:2px;right:2px;width:3px;height:3px;border-radius:50%;}
+.cal-expand-btn{font-size:11px;color:var(--text3);cursor:pointer;padding:4px 0 0;display:block;text-align:center;}
+.cal-expand-btn:hover{color:var(--accent);}
 
-/* RULES */
-.rule-item {
-  display: flex; gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-  align-items: flex-start;
-}
-.rule-item:last-child { border-bottom: none; }
-.rule-num {
-  width: 22px; height: 22px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 500; flex-shrink: 0; margin-top: 1px;
-}
-.rule-body { flex: 1; }
-.rule-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
-.rule-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
-.rule-eg { font-size: 11px; color: var(--text3); margin-top: 3px; font-style: italic; }
-
-/* CHECKLIST */
-.check-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  background: var(--bg3);
-  margin-bottom: 8px;
-  transition: background 0.15s;
-  cursor: pointer;
-}
-.check-item:hover { background: var(--bg4); }
-.check-item input[type=checkbox] {
-  width: 16px; height: 16px; min-width: 16px;
-  margin-top: 1px; cursor: pointer;
-  accent-color: var(--accent);
-  padding: 0;
-}
-.check-text { font-size: 13px; color: var(--text2); flex: 1; user-select: none; }
-.check-text.done { text-decoration: line-through; color: var(--text3); }
-
-/* SCORE BOX */
-.score-box {
-  background: var(--bg3);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  text-align: center;
-  margin-top: 16px;
-}
-.score-num { font-size: 32px; font-weight: 500; color: var(--accent); }
-.score-lbl { font-size: 12px; color: var(--text3); margin-top: 2px; }
-.score-verdict { font-size: 13px; font-weight: 500; margin-top: 8px; }
-
-/* TRADE LIST */
-.trade-item {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  transition: border-color 0.2s;
-}
-.trade-item:hover { border-color: var(--border2); }
-.trade-header {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 10px; flex-wrap: wrap;
-}
-.trade-name { font-size: 15px; font-weight: 500; color: var(--text); }
-.trade-meta { font-size: 12px; color: var(--text3); }
-.trade-body { font-size: 13px; color: var(--text2); line-height: 1.6; }
-.trade-body strong { color: var(--text); font-weight: 500; }
-.trade-result {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border);
-  display: flex; gap: 16px; flex-wrap: wrap;
-}
-.trade-result-item { font-size: 12px; color: var(--text3); }
-.trade-result-item span { font-weight: 500; }
-.trade-actions { display: flex; gap: 8px; margin-top: 10px; }
-
-/* HOLDINGS */
-.holding-row {
-  display: grid;
-  grid-template-columns: 1fr 80px 80px 80px 80px;
-  gap: 12px; align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-}
-.holding-row:last-child { border-bottom: none; }
-.holding-header {
-  display: grid;
-  grid-template-columns: 1fr 80px 80px 80px 80px;
-  gap: 12px;
-  padding: 8px 0 10px;
-  border-bottom: 1px solid var(--border2);
-  font-size: 11px; color: var(--text3);
-  text-transform: uppercase; letter-spacing: 0.08em;
-}
-@media(max-width:600px) {
-  .holding-row, .holding-header {
-    grid-template-columns: 1fr 70px 70px;
-  }
-  .holding-row > *:nth-child(4),
-  .holding-row > *:nth-child(5),
-  .holding-header > *:nth-child(4),
-  .holding-header > *:nth-child(5) { display: none; }
-}
-
-/* SIGNAL */
-.signal-item {
-  display: flex; gap: 14px;
-  padding: 14px;
-  border-radius: var(--radius-sm);
-  margin-bottom: 10px;
-  border-left: 3px solid;
-}
-.signal-red { background: var(--red-bg); border-color: var(--red); }
-.signal-green { background: var(--green-bg); border-color: var(--green); }
-.signal-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
-.signal-red .signal-title { color: var(--red); }
-.signal-green .signal-title { color: var(--green); }
-.signal-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
-.signal-date { font-size: 11px; color: var(--text3); margin-top: 4px; }
-
-/* PHASE */
-.phase-row {
-  display: flex; gap: 10px; align-items: flex-start;
-  padding: 10px 0; border-bottom: 1px solid var(--border);
-}
-.phase-row:last-child { border-bottom: none; }
-.phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
-.phase-name { font-size: 13px; font-weight: 500; color: var(--text); }
-.phase-desc { font-size: 12px; color: var(--text2); line-height: 1.5; margin-top: 2px; }
-
-/* EMPTY STATE */
-.empty {
-  text-align: center; padding: 48px 20px;
-  color: var(--text3); font-size: 13px;
-}
-.empty-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.4; }
-
-/* MODAL */
-.modal-overlay {
-  display: none;
-  position: fixed; inset: 0; z-index: 1000;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(4px);
-  align-items: center; justify-content: center;
-  padding: 20px;
-}
-.modal-overlay.open { display: flex; }
-.modal {
-  background: var(--bg2);
-  border: 1px solid var(--border2);
-  border-radius: 14px;
-  padding: 28px;
-  width: 100%; max-width: 560px;
-  max-height: 90vh; overflow-y: auto;
-}
-.modal-title {
-  font-family: var(--serif);
-  font-size: 18px; font-weight: 400;
-  color: var(--text); margin-bottom: 24px;
-}
-
-/* DIVIDER */
-.divider { height: 1px; background: var(--border); margin: 20px 0; }
-
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 2px; }
-
-/* ANIMATIONS */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-.panel.active { animation: fadeIn 0.2s ease; }
-
-/* REVIEW */
-.review-top {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
-}
-@media(max-width:600px) { .review-top { grid-template-columns: 1fr; } }
-.review-section { margin-bottom: 20px; }
-.review-section-title {
-  font-size: 12px; color: var(--text3); text-transform: uppercase;
-  letter-spacing: 0.08em; margin-bottom: 10px; font-weight: 500;
-}
-.pnl-bar-wrap { margin-bottom: 6px; }
-.pnl-bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 4px; }
-.pnl-bar-bg { background: var(--bg4); border-radius: 3px; height: 6px; }
-.pnl-bar-fill { border-radius: 3px; height: 6px; transition: width 0.4s ease; }
-
-/* TODAY PANEL */
-.today-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 16px; }
-@media(max-width:640px) { .today-grid { grid-template-columns: 1fr; } }
-.market-input-row {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;
-}
-.index-card {
-  background: var(--bg3); border-radius: var(--radius-sm);
-  padding: 12px; text-align: center;
-}
-.index-name { font-size: 11px; color: var(--text3); margin-bottom: 4px; }
-.index-val { font-size: 18px; font-weight: 500; color: var(--text); }
-.index-chg { font-size: 12px; margin-top: 2px; }
+/* RESOURCES */
+.res-row{display:grid;grid-template-columns:90px 1fr auto auto;gap:12px;align-items:center;padding:11px 12px;border-radius:var(--rs);background:var(--bg3);margin-bottom:6px;transition:background .15s;}
+.res-row:hover{background:var(--bg4);}
+.res-row.dragging{opacity:.4;}
+.res-row.drag-over{outline:2px dashed var(--accent);outline-offset:-2px;}
+.res-drag{cursor:grab;color:var(--text3);padding:0 4px;font-size:16px;flex-shrink:0;}
+.res-drag:active{cursor:grabbing;}
+.res-type{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500;text-align:center;flex-shrink:0;}
+.res-info{min-width:0;}
+.res-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.res-url{font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px;}
+.res-visited{font-size:11px;color:var(--text3);white-space:nowrap;flex-shrink:0;}
 </style>
 </head>
 <body>
-
 <nav>
-  <div class="nav-brand">复盘笔记</div>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showPanel('today')">今日</button>
-    <button class="nav-tab" onclick="showPanel('holdings')">持仓</button>
-    <button class="nav-tab" onclick="showPanel('checklist')">入场检查</button>
-    <button class="nav-tab" onclick="showPanel('trades')">交易记录</button>
-    <button class="nav-tab" onclick="showPanel('signals')">信号</button>
-    <button class="nav-tab" onclick="showPanel('rules')">规则手册</button>
-    <button class="nav-tab" onclick="showPanel('stats')">统计</button>
+  <div class="nb">复盘笔记</div>
+  <div class="nt">
+    <button class="active" onclick="SP('today',this)">今日</button>
+    <button onclick="SP('diary',this)">历史日记</button>
+    <button onclick="SP('holdings',this)">持仓</button>
+    <button onclick="SP('checklist',this)">入场检查</button>
+    <button onclick="SP('tradecard',this)">交易卡</button>
+    <button onclick="SP('trades',this)">交易记录</button>
+    <button onclick="SP('signals',this)">信号</button>
+    <button onclick="SP('rules',this)">规则手册</button>
+    <button onclick="SP('plan',this)">30天计划</button>
+    <button onclick="SP('stats',this)">统计</button>
+    <button onclick="SP('resources',this)">资源站</button>
   </div>
-  <div class="nav-date" id="nav-date"></div>
+  <div class="nd" id="nav-date"></div>
+  <button onclick="openThemePicker()" style="margin-left:10px;background:transparent;border:1px solid var(--border2);border-radius:var(--rs);padding:4px 10px;color:var(--text3);font-size:12px;cursor:pointer;font-family:var(--sans);white-space:nowrap;" title="切换皮肤">皮肤</button>
 </nav>
+
+<!-- THEME PICKER -->
+<div id="theme-overlay" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:28px;width:100%;max-width:580px;margin:20px;">
+    <div style="font-family:var(--serif);font-size:18px;color:var(--text);margin-bottom:20px;">选择皮肤</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;" id="theme-grid"></div>
+    <div style="margin-top:14px;font-size:12px;color:var(--text3);">皮肤偏好自动保存到本地</div>
+  </div>
+</div>
 
 <main>
 
 <!-- TODAY -->
 <div class="panel active" id="panel-today">
-  <div class="page-header">
-    <div class="page-title">今日复盘</div>
-    <div class="page-sub" id="today-date-sub"></div>
-  </div>
-  <div class="today-grid">
-    <div>
-      <div class="card">
-        <div class="card-title">大盘指数 <span>手动更新</span></div>
-        <div class="market-input-row">
-          <div>
-            <div class="form-label">上证指数</div>
-            <input type="number" id="idx-sh" placeholder="4124" step="0.01" onchange="saveMarket()">
+  <div class="ph">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+      <div><div class="pt">今日复盘</div><div class="ps" id="today-sub"></div></div>
+      <!-- MINI CALENDAR -->
+      <div style="flex-shrink:0;">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;min-width:200px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <button class="cal-nav" onclick="calPrev()">‹</button>
+            <div class="cal-month" id="cal-month-label"></div>
+            <button class="cal-nav" onclick="calNext()">›</button>
           </div>
-          <div>
-            <div class="form-label">深证成指</div>
-            <input type="number" id="idx-sz" placeholder="14172" step="0.01" onchange="saveMarket()">
-          </div>
-          <div>
-            <div class="form-label">创业板</div>
-            <input type="number" id="idx-cy" placeholder="3229" step="0.01" onchange="saveMarket()">
-          </div>
-          <div>
-            <div class="form-label">今日涨跌 %</div>
-            <input type="number" id="idx-chg" placeholder="+0.38" step="0.01" onchange="saveMarket()">
-          </div>
+          <div id="cal-dow-row" style="display:grid;grid-template-columns:repeat(7,1fr);gap:1px;margin-bottom:2px;"></div>
+          <div id="cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:1px;"></div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">重点关注板块 / 个股动态</div>
-        <textarea id="today-watchlist" placeholder="今日重点观察的板块或个股，价格变化，异动原因..." rows="5" oninput="saveTodayNote()"></textarea>
+        <div id="cal-preview" style="display:none;margin-top:8px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:12px;min-width:200px;max-width:280px;"></div>
       </div>
     </div>
-
+  </div>
+  <div class="card" style="margin-bottom:13px;">
+    <div class="ct">账户健康检查 <span>每日开盘前核对</span></div>
+    <div class="hlr"><span class="hll">总仓位 ≤ 70%</span><span class="hls" id="h-pos">--</span></div>
+    <div class="hlr"><span class="hll">单股 ≤ 25%</span><span class="hls" id="h-single">--</span></div>
+    <div class="hlr"><span class="hll">现金 ≥ 20%</span><span class="hls" id="h-cash">--</span></div>
+    <div class="hlr"><span class="hll">有ST重仓 ≥ 20%</span><span class="hls" id="h-st">--</span></div>
+    <div style="margin-top:11px;">
+      <div class="fl">输入总资产和可用现金以更新检查</div>
+      <div style="display:flex;gap:8px;">
+        <input type="number" id="acct-total" placeholder="总资产（元）" step="100" oninput="updateHealth()">
+        <input type="number" id="acct-cash" placeholder="可用现金（元）" step="100" oninput="updateHealth()">
+      </div>
+    </div>
+  </div>
+  <div class="tg2">
     <div>
       <div class="card">
-        <div class="card-title">当日投资复盘</div>
-        <div class="form-group">
-          <div class="form-label">今天做了什么操作？（没操作也要写"观察"）</div>
-          <textarea id="today-action" placeholder="买入/卖出/持仓不动/观察..." rows="3" oninput="saveTodayNote()"></textarea>
+        <div class="ct">大盘指数 <span>手动更新</span></div>
+        <div class="mr">
+          <div><div class="fl">上证指数</div><input type="number" id="idx-sh" placeholder="4124" step="0.01" onchange="saveMarket()"></div>
+          <div><div class="fl">深证成指</div><input type="number" id="idx-sz" placeholder="14172" step="0.01" onchange="saveMarket()"></div>
+          <div><div class="fl">创业板</div><input type="number" id="idx-cy" placeholder="3229" step="0.01" onchange="saveMarket()"></div>
+          <div><div class="fl">今日涨跌%</div><input type="number" id="idx-chg" placeholder="+0.38" step="0.01" onchange="saveMarket()"></div>
         </div>
-        <div class="form-group">
-          <div class="form-label">判断是否正确？为什么？</div>
-          <textarea id="today-review" placeholder="哪里判断准了，哪里判断错了，原因是什么..." rows="3" oninput="saveTodayNote()"></textarea>
-        </div>
-        <div class="form-group">
-          <div class="form-label">明天需要关注什么？</div>
-          <textarea id="today-tomorrow" placeholder="明天的观察重点、计划操作..." rows="2" oninput="saveTodayNote()"></textarea>
-        </div>
-        <div class="form-group">
-          <div class="form-label">今日情绪评分（1-10）</div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <input type="range" id="mood" min="1" max="10" value="5" style="flex:1;" oninput="document.getElementById('mood-val').textContent=this.value;saveTodayNote()">
-            <span id="mood-val" style="font-size:16px;font-weight:500;color:var(--accent);min-width:20px;">5</span>
+      </div>
+      <div class="card">
+        <div class="ct">今日操盘剧本</div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:9px;">开盘前写下每只持仓今天的应对方案</div>
+        <div id="playbook-list"></div>
+        <button class="btn bg bs" onclick="OM('modal-playbook')" style="width:100%;margin-top:7px;">+ 添加个股剧本</button>
+      </div>
+      <div class="card">
+        <div class="ct">重点关注板块 / 个股动态</div>
+        <textarea id="today-watchlist" placeholder="今日重点观察的板块或个股，价格变化，异动原因..." rows="4" oninput="saveTodayNote()"></textarea>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ct">当日复盘</div>
+        <div class="fg"><div class="fl">今天做了什么操作？（没操作也要写"观察"）</div><textarea id="today-action" placeholder="买入/卖出/持仓不动/观察..." rows="3" oninput="saveTodayNote()"></textarea></div>
+        <div class="fg"><div class="fl">判断是否正确？为什么？</div><textarea id="today-review" placeholder="哪里准了，哪里错了..." rows="3" oninput="saveTodayNote()"></textarea></div>
+        <div class="fg"><div class="fl">有没有违反规则？哪一条？</div><textarea id="today-rules" placeholder="违反了哪条规则？下次怎么改？" rows="2" oninput="saveTodayNote()"></textarea></div>
+        <div class="fg"><div class="fl">明天需要关注什么？</div><textarea id="today-tomorrow" placeholder="明天的观察重点、计划操作..." rows="2" oninput="saveTodayNote()"></textarea></div>
+        <div class="fg">
+          <div class="fl">今日情绪评分（1-10）</div>
+          <div style="display:flex;align-items:center;gap:11px;">
+            <input type="range" id="mood" min="1" max="10" value="5" style="flex:1;" oninput="$('mood-val').textContent=this.value;saveTodayNote()">
+            <span id="mood-val" style="font-size:16px;font-weight:500;color:var(--accent);min-width:18px;">5</span>
           </div>
-          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:4px;">
-            <span>极度恐慌</span><span>平静理性</span><span>过度贪婪</span>
-          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:3px;"><span>极度恐慌</span><span>平静理性</span><span>过度贪婪</span></div>
         </div>
-        <button class="btn btn-primary" onclick="saveTodayFull()">保存今日复盘</button>
+        <div style="display:flex;gap:8px;">
+          <button class="btn bp" onclick="saveTodayFull()" style="flex:1;">保存今日复盘</button>
+          <button class="btn bg bs" onclick="clearToday()" title="清空今日所有输入">清空</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIARY -->
+<div class="panel" id="panel-diary">
+  <div class="ph">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
+      <div><div class="pt">历史日记</div><div class="ps">所有复盘记录，点击日期查看详情</div></div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn bg bs" onclick="exportData()">导出备份</button>
+        <label class="btn bg bs" style="cursor:pointer;">导入恢复<input type="file" accept=".json" onchange="importData(event)" style="display:none;"></label>
+        <button class="btn bd bs" onclick="clearAllData()">一键清空</button>
+      </div>
+    </div>
+  </div>
+  <div class="g2" style="align-items:start;">
+    <div>
+      <div class="card">
+        <div class="ct">复盘日历 <span>有记录的日期</span></div>
+        <div id="diary-calendar"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" id="diary-detail-card" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <div class="ct" style="margin:0;" id="diary-detail-date"></div>
+          <button class="btn bg bs" onclick="$('diary-detail-card').style.display='none'">关闭</button>
+        </div>
+        <div id="diary-detail-content"></div>
+      </div>
+      <div class="card" id="diary-empty-hint">
+        <div class="empty" style="padding:32px 0;">点击左侧日期查看当天复盘记录</div>
       </div>
     </div>
   </div>
@@ -489,134 +428,129 @@ select option { background: var(--bg3); }
 
 <!-- HOLDINGS -->
 <div class="panel" id="panel-holdings">
-  <div class="page-header">
-    <div class="page-title">当前持仓</div>
-    <div class="page-sub">手动更新现价，系统自动计算盈亏</div>
-  </div>
+  <div class="ph"><div class="pt">当前持仓</div><div class="ps">手动更新现价，系统自动计算盈亏与仓位结构</div></div>
   <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-      <div class="card-title" style="margin:0;">持仓列表</div>
-      <button class="btn btn-ghost btn-sm" onclick="openModal('modal-add-holding')">+ 添加持仓</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;flex-wrap:wrap;gap:9px;">
+      <div class="ct" style="margin:0;">持仓列表</div>
+      <button class="btn bg bs" onclick="OM('modal-add-holding')">+ 添加持仓</button>
     </div>
     <div id="holdings-list"></div>
   </div>
-  <div class="grid3" id="holdings-stats">
-    <div class="stat"><div class="stat-val" id="hs-total">--</div><div class="stat-lbl">总市值</div></div>
-    <div class="stat"><div class="stat-val" id="hs-pnl">--</div><div class="stat-lbl">总持仓盈亏</div></div>
-    <div class="stat"><div class="stat-val" id="hs-pnlpct">--</div><div class="stat-lbl">盈亏比例</div></div>
+  <div class="g3" style="margin-bottom:13px;">
+    <div class="stat"><div class="sv" id="hs-total">--</div><div class="sl">总市值</div></div>
+    <div class="stat"><div class="sv" id="hs-pnl">--</div><div class="sl">总持仓盈亏</div></div>
+    <div class="stat"><div class="sv" id="hs-pnlpct">--</div><div class="sl">盈亏比例</div></div>
   </div>
+  <div class="card"><div class="ct">仓位结构分析</div><div id="pos-breakdown"></div></div>
 </div>
 
 <!-- CHECKLIST -->
 <div class="panel" id="panel-checklist">
-  <div class="page-header">
-    <div class="page-title">入场自检</div>
-    <div class="page-sub">买入任何股票前，必须逐条核对。全绿才能进场。</div>
-  </div>
-  <div class="grid2">
+  <div class="ph"><div class="pt">入场自检</div><div class="ps">买入任何股票前，必须逐条核对。全绿才能进场。</div></div>
+  <div class="g2">
     <div>
       <div class="card">
-        <div class="card-title">基本面门槛</div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">我能用两三句话讲清楚这只股票为什么会涨</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">公司有护城河（垄断/专利/央企/高分红之一）</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">行业不在下行周期顶部</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">公司非持续亏损（或有明确反转逻辑）</div>
-        </div>
+        <div class="ct">基本面门槛 <span>必须全部满足</span></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">我能用两三句话讲清楚这只股票为什么会涨</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">公司有护城河（垄断/专利/央企/高分红之一）</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">行业不在下行周期顶部</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">公司非持续亏损（或有明确反转逻辑）</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">非ST股（ST股需要极强独立判断才考虑）</div></div>
       </div>
       <div class="card">
-        <div class="card-title">仓位规则</div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">这只股票仓位不超过总资产30%</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">买入后仍保留至少20%现金</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">我不是在情绪激动状态下做这个决定</div>
-        </div>
+        <div class="ct">仓位规则 <span>必须全部满足</span></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">这只股票仓位不超过总资产25%</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">买入后仍保留至少20%现金</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">我能独立讲清楚逻辑（非完全跟随他人）</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">我不是在情绪激动状态下做这个决定</div></div>
       </div>
     </div>
     <div>
       <div class="card">
-        <div class="card-title">技术面信号（满足2条以上）</div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">股价在5/10/20日均线全部下方（低位）</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">已经横盘至少1个月</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">出现圆弧底或放量下砸后企稳</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <input type="checkbox" onclick="event.stopPropagation();toggleCheck(this.parentElement)">
-          <div class="check-text">跌势明显变缓（从大阴变小阴小阳）</div>
-        </div>
+        <div class="ct">技术面信号 <span>满足2条以上</span></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">股价在5/10/20日均线全部下方（低位）</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">已经横盘至少1个月</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">出现圆弧底或放量下砸后企稳</div></div>
+        <div class="ci" onclick="TC(this)"><input type="checkbox" onclick="event.stopPropagation();TC(this.parentElement)"><div class="ct2">跌势明显变缓（大阴变小阴小阳）</div></div>
       </div>
-      <div class="score-box">
-        <div class="score-num" id="cl-score">0 / 11</div>
-        <div class="score-lbl">条件满足</div>
-        <div class="score-verdict" id="cl-verdict" style="color:var(--text3);">尚未满足入场条件</div>
-      </div>
-      <div style="margin-top:12px;">
-        <div class="form-group">
-          <div class="form-label">记录检查的股票名</div>
-          <input type="text" id="cl-stock" placeholder="例：赛轮轮胎">
+      <div class="card">
+        <div class="ct">仓位决策树 <span>决定买多少</span></div>
+        <div class="dtq">我能独立讲清楚这个逻辑吗？</div>
+        <div class="dto">
+          <button class="dtb" onclick="dtree('q1','yes',this)">能，完全自己判断</button>
+          <button class="dtb" onclick="dtree('q1','partial',this)">部分，跟随+理解</button>
+          <button class="dtb" onclick="dtree('q1','no',this)">不能，完全跟随</button>
         </div>
-        <button class="btn btn-ghost btn-sm" onclick="saveChecklistRecord()" style="width:100%;">保存本次检查记录</button>
-        <button class="btn btn-ghost btn-sm" onclick="resetChecklist()" style="width:100%;margin-top:8px;">重置</button>
+        <div class="dtq" id="dtree-q2" style="display:none;margin-top:11px;">我愿意承受最大 -8% 的亏损吗？</div>
+        <div class="dto" id="dtree-q2-opts" style="display:none;">
+          <button class="dtb" onclick="dtree('q2','yes',this)">愿意</button>
+          <button class="dtb" onclick="dtree('q2','no',this)">不愿意</button>
+        </div>
+        <div class="dtr" id="dtree-result"></div>
       </div>
+      <div class="sb">
+        <div class="sn" id="cl-score">0 / 13</div>
+        <div class="sl2">条件满足</div>
+        <div class="sv2" id="cl-verdict" style="color:var(--text3);">尚未满足入场条件</div>
+      </div>
+      <div style="margin-top:11px;">
+        <div class="fg"><div class="fl">检查的股票名称</div><input type="text" id="cl-stock" placeholder="例：赛轮轮胎"></div>
+        <button class="btn bg bs" onclick="saveChecklistRecord()" style="width:100%;">保存检查记录</button>
+        <button class="btn bg bs" onclick="resetChecklist()" style="width:100%;margin-top:7px;">重置</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRADE CARD -->
+<div class="panel" id="panel-tradecard">
+  <div class="ph"><div class="pt">交易卡</div><div class="ps">每笔买入前必须填完这四行。写不出来就不应该买。</div></div>
+  <div class="g2">
+    <div>
+      <div class="card">
+        <div class="ct">新建交易卡</div>
+        <div class="fg"><div class="fl">股票名称 <span class="req">*</span></div><input type="text" id="tc-name" placeholder="例：中国国航"></div>
+        <div class="fg"><div class="fl">1. 我买它是因为（类型+逻辑）<span class="req">*</span></div><textarea id="tc-reason" placeholder="例：低位横盘+石油价格下跌利好航空，是央企不会退市..." rows="3"></textarea></div>
+        <div class="fg"><div class="fl">2. 我在什么信号下买（触发条件）<span class="req">*</span></div><textarea id="tc-trigger" placeholder="例：放量站上5日线，连续两天转强..." rows="2"></textarea></div>
+        <div class="fg"><div class="fl">3. 如果错了，我在哪里止损</div><input type="text" id="tc-stop" placeholder="例：跌破6.5，或故事逻辑改变立刻离场"></div>
+        <div class="fg"><div class="fl">4. 如果对了，我在哪里止盈</div><input type="text" id="tc-exit" placeholder="例：涨8%先卖一半，剩余用5日线跟踪"></div>
+        <div class="g2">
+          <div class="fg"><div class="fl">计划仓位 %</div><input type="number" id="tc-pos" placeholder="15" step="1"></div>
+          <div class="fg"><div class="fl">买入价格</div><input type="number" id="tc-price" placeholder="7.20" step="0.001"></div>
+        </div>
+        <button class="btn bp" onclick="saveTradeCard()" style="width:100%;">保存交易卡</button>
+      </div>
+    </div>
+    <div>
+      <div class="card"><div class="ct">已保存的交易卡</div><div id="tc-list"><div class="empty">暂无交易卡</div></div></div>
     </div>
   </div>
 </div>
 
 <!-- TRADES -->
 <div class="panel" id="panel-trades">
-  <div class="page-header">
-    <div class="page-title">交易记录</div>
-    <div class="page-sub">每笔操作前写下理由，操作后记录结果</div>
-  </div>
-  <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
-    <button class="btn btn-primary" onclick="openModal('modal-add-trade')">+ 新增记录</button>
+  <div class="ph"><div class="pt">交易记录</div><div class="ps">每笔操作前写下理由，操作后记录结果和复盘</div></div>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:13px;">
+    <button class="btn bp" onclick="OM('modal-add-trade')">+ 新增记录</button>
   </div>
   <div id="trades-list"></div>
 </div>
 
 <!-- SIGNALS -->
 <div class="panel" id="panel-signals">
-  <div class="page-header">
-    <div class="page-title">信号记录</div>
-    <div class="page-sub">记录重大错误警示（红色）和正确判断（绿色）</div>
-  </div>
-  <div class="grid2">
+  <div class="ph"><div class="pt">信号记录</div><div class="ps">记录重大错误警示（红）和正确判断（绿），是成长最快的来源</div></div>
+  <div class="g2">
     <div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <div style="font-size:13px;font-weight:500;color:var(--red);">红色信号·重大错误警示</div>
-        <button class="btn btn-ghost btn-sm" onclick="openSignalModal('red')">+ 添加</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="font-size:13px;font-weight:500;color:var(--red);">红色信号·重大错误</div>
+        <button class="btn bg bs" onclick="openSignalModal('red')">+ 添加</button>
       </div>
       <div id="signals-red"></div>
     </div>
     <div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <div style="font-size:13px;font-weight:500;color:var(--green);">绿色信号·正确判断记录</div>
-        <button class="btn btn-ghost btn-sm" onclick="openSignalModal('green')">+ 添加</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="font-size:13px;font-weight:500;color:var(--green);">绿色信号·正确判断</div>
+        <button class="btn bg bs" onclick="openSignalModal('green')">+ 添加</button>
       </div>
       <div id="signals-green"></div>
     </div>
@@ -625,653 +559,770 @@ select option { background: var(--bg3); }
 
 <!-- RULES -->
 <div class="panel" id="panel-rules">
-  <div class="page-header">
-    <div class="page-title">规则手册</div>
-    <div class="page-sub">从朱老师七个月聊天记录提炼的核心规则</div>
-  </div>
-  <div class="grid2">
+  <div class="ph"><div class="pt">规则手册</div><div class="ps">从朱老师七个月聊天记录提炼 · 所有规则直接来自原始内容</div></div>
+  <div class="g2">
     <div>
       <div class="card">
-        <div class="card-title">选股资格线 <span>必须全部满足</span></div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:#EAF3DE;color:#3B6D11;">1</div>
-          <div class="rule-body">
-            <div class="rule-name">能讲清楚故事</div>
-            <div class="rule-desc">用两三句话说清楚它为什么会涨。讲不清楚不买。</div>
-          </div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:#EAF3DE;color:#3B6D11;">2</div>
-          <div class="rule-body">
-            <div class="rule-name">公司有护城河</div>
-            <div class="rule-desc">垄断技术/专利、细分龙头、国家背书/央企、高分红+稳定盈利，满足其一。</div>
-          </div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:#EAF3DE;color:#3B6D11;">3</div>
-          <div class="rule-body">
-            <div class="rule-name">行业不在周期顶部</div>
-            <div class="rule-desc">判断行业周期阶段。顶部和下行途中不买，等底部确认。</div>
-          </div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:#EAF3DE;color:#3B6D11;">4</div>
-          <div class="rule-body">
-            <div class="rule-name">排除垃圾股</div>
-            <div class="rule-desc">无业绩纯炒作、持续亏损无反转逻辑、大涨后未经横盘，全排除。</div>
-            <div class="rule-eg">"要远离垃圾股，就跟远离垃圾人一样。"</div>
-          </div>
-        </div>
+        <div class="ct">选股资格线 <span>必须全部满足</span></div>
+        <div class="ri"><div class="rn" style="background:#EAF3DE;color:#3B6D11;">1</div><div class="rb"><div class="rname">能讲清楚故事</div><div class="rdesc">用两三句话说清楚它为什么会涨。讲不清楚不买。</div></div></div>
+        <div class="ri"><div class="rn" style="background:#EAF3DE;color:#3B6D11;">2</div><div class="rb"><div class="rname">公司有护城河</div><div class="rdesc">垄断技术/专利、细分龙头、国家背书/央企、高分红+稳定盈利，满足其一。</div></div></div>
+        <div class="ri"><div class="rn" style="background:#EAF3DE;color:#3B6D11;">3</div><div class="rb"><div class="rname">行业不在周期顶部</div><div class="rdesc">判断行业周期阶段。顶部和下行途中不买，等底部确认。</div></div></div>
+        <div class="ri"><div class="rn" style="background:#EAF3DE;color:#3B6D11;">4</div><div class="rb"><div class="rname">排除垃圾股</div><div class="rdesc">无业绩纯炒作、持续亏损无反转逻辑、大涨未经横盘，全排除。</div><div class="reg">"要远离垃圾股，就跟远离垃圾人一样。"</div></div></div>
       </div>
-
       <div class="card">
-        <div class="card-title">出场信号 <span>任意一条考虑减仓</span></div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">A</div>
-          <div class="rule-body"><div class="rule-name">涨势变缓</div><div class="rule-desc">连续上涨后出现小阳小阴、涨速放缓。不等最高点。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">B</div>
-          <div class="rule-body"><div class="rule-name">高位大红柱</div><div class="rule-desc">成交量突然放大且下跌=主力出货信号。割肉也要跑。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">C</div>
-          <div class="rule-body"><div class="rule-name">高位横盘</div><div class="rule-desc">涨到高位后横盘=出货模式。此时不管是否盈利都离场。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">D</div>
-          <div class="rule-body"><div class="rule-name">换手率打到历史高位</div><div class="rule-desc">对照历史换手率，接近历史高点=出货顶部信号。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--amber-bg);color:var(--amber);">E</div>
-          <div class="rule-body"><div class="rule-name">故事逻辑被证伪</div><div class="rule-desc">当初买入的基本面逻辑根本性改变，不管涨跌立刻重新评估。</div></div>
-        </div>
+        <div class="ct">出场信号 <span>任意一条考虑减仓</span></div>
+        <div class="ri"><div class="rn" style="background:var(--amber-bg);color:var(--amber);">A</div><div class="rb"><div class="rname">涨势变缓</div><div class="rdesc">连续上涨后出现小阳小阴、涨速放缓。先卖一半，剩余用5日线跟踪。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--amber-bg);color:var(--amber);">B</div><div class="rb"><div class="rname">高位大红柱</div><div class="rdesc">成交量突然放大且下跌=主力出货信号。割肉也要跑。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--amber-bg);color:var(--amber);">C</div><div class="rb"><div class="rname">高位横盘</div><div class="rdesc">涨到高位后横盘=出货模式。此时无论盈亏都应离场。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--amber-bg);color:var(--amber);">D</div><div class="rb"><div class="rname">换手率打到历史高位</div><div class="rdesc">对照历史换手率，接近历史高点=出货顶部信号。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--amber-bg);color:var(--amber);">E</div><div class="rb"><div class="rname">故事逻辑被证伪</div><div class="rdesc">当初买入的基本面逻辑根本性改变，不管涨跌立刻重新评估。</div></div></div>
+      </div>
+      <div class="card">
+        <div class="ct">仓位硬规则 <span>死守，不因情绪破例</span></div>
+        <div class="ri"><div class="rn" style="background:var(--blue-bg);color:var(--blue);">1</div><div class="rb"><div class="rname">总仓位 ≤ 70%</div><div class="rdesc">市场不确定时降至50%；连续亏损时降至30%。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--blue-bg);color:var(--blue);">2</div><div class="rb"><div class="rname">单股上限按确定性分级</div><div class="rdesc">完全自己判断 ≤25%；跟随+理解部分 ≤15%；完全跟随 ≤10%；ST/高风险 0%。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--blue-bg);color:var(--blue);">3</div><div class="rb"><div class="rname">必须留20%现金</div><div class="rdesc">有子弹才不慌，才能在更好的机会出现时补仓。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--blue-bg);color:var(--blue);">4</div><div class="rb"><div class="rname">止损 -8% 强制执行</div><div class="rdesc">亏损达到-8%不问原因直接止损。时间止损：20天不涨也走。</div></div></div>
       </div>
     </div>
-
     <div>
       <div class="card">
-        <div class="card-title">入场信号 <span>满足2条以上才进</span></div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">A</div>
-          <div class="rule-body"><div class="rule-name">三线低位</div><div class="rule-desc">股价在5/10/20日均线全部下方。这是低位基准。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">B</div>
-          <div class="rule-body">
-            <div class="rule-name">横盘至少1个月</div>
-            <div class="rule-desc">长期横盘=主力吸筹。横盘越长筹码越足。</div>
-            <div class="rule-eg">"底部横盘装僵尸股，是最佳买入窗口。"</div>
-          </div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">C</div>
-          <div class="rule-body"><div class="rule-name">圆弧底形态</div><div class="rule-desc">从急跌转缓跌再平缓，形成弧形底部。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">D</div>
-          <div class="rule-body">
-            <div class="rule-name">放量砸后企稳</div>
-            <div class="rule-desc">大成交量急跌后，量能萎缩、价格企稳=洗盘接近尾声。</div>
-          </div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:#EEEDFE;color:#534AB7;">E</div>
-          <div class="rule-body"><div class="rule-name">跌势变缓那几天</div><div class="rule-desc">连续大阴线变小阴小阳，跌速明显放缓。</div></div>
-        </div>
+        <div class="ct">入场信号 <span>满足2条以上才进</span></div>
+        <div class="ri"><div class="rn" style="background:#EEEDFE;color:#534AB7;">A</div><div class="rb"><div class="rname">三线低位</div><div class="rdesc">股价在5/10/20日均线全部下方。这是低位基准。</div></div></div>
+        <div class="ri"><div class="rn" style="background:#EEEDFE;color:#534AB7;">B</div><div class="rb"><div class="rname">横盘至少1个月</div><div class="rdesc">长期横盘=主力吸筹。横盘越长筹码越足。</div><div class="reg">"底部横盘装僵尸股，是最佳买入窗口。"</div></div></div>
+        <div class="ri"><div class="rn" style="background:#EEEDFE;color:#534AB7;">C</div><div class="rb"><div class="rname">圆弧底形态</div><div class="rdesc">从急跌转缓跌再平缓，形成弧形底部。</div></div></div>
+        <div class="ri"><div class="rn" style="background:#EEEDFE;color:#534AB7;">D</div><div class="rb"><div class="rname">放量砸后企稳</div><div class="rdesc">大成交量急跌后，量能萎缩、价格企稳=洗盘接近尾声。</div></div></div>
+        <div class="ri"><div class="rn" style="background:#EEEDFE;color:#534AB7;">E</div><div class="rb"><div class="rname">跌势变缓那几天</div><div class="rdesc">连续大阴线变小阴小阳，跌速明显放缓。</div></div></div>
       </div>
-
       <div class="card">
-        <div class="card-title">禁止清单 <span>永远不做</span></div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
-          <div class="rule-body"><div class="rule-name">不追高</div><div class="rule-desc">大涨的股票不买，除非经历充分横盘。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
-          <div class="rule-body"><div class="rule-name">不在下跌途中抄底</div><div class="rule-desc">等日K线变平缓出现底部信号再进。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
-          <div class="rule-body"><div class="rule-name">不因情绪做决定</div><div class="rule-desc">一只股的亏损情绪不能影响另一只的操作。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
-          <div class="rule-body"><div class="rule-name">单股不超过30%</div><div class="rule-desc">任何一只股票不超过总资产30%，留20%现金。</div></div>
-        </div>
-        <div class="rule-item">
-          <div class="rule-num" style="background:var(--red-bg);color:var(--red);">X</div>
-          <div class="rule-body"><div class="rule-name">不买读不懂的行业</div><div class="rule-desc">"你要非常了解这个行业，这样信念底气才足。"</div></div>
-        </div>
+        <div class="ct">禁止清单 <span>永远不做</span></div>
+        <div class="ri"><div class="rn" style="background:var(--red-bg);color:var(--red);">X</div><div class="rb"><div class="rname">不追高</div><div class="rdesc">大涨的股票不买，除非经历充分横盘。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--red-bg);color:var(--red);">X</div><div class="rb"><div class="rname">不在下跌途中抄底</div><div class="rdesc">等日K线变平缓出现底部信号再进。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--red-bg);color:var(--red);">X</div><div class="rb"><div class="rname">不因情绪做决定</div><div class="rdesc">一只股的亏损情绪不能影响另一只的操作。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--red-bg);color:var(--red);">X</div><div class="rb"><div class="rname">仓位和确定性必须对齐</div><div class="rdesc">不能用50%仓位验证你自己都不确定的逻辑。</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--red-bg);color:var(--red);">X</div><div class="rb"><div class="rname">不买读不懂的行业</div><div class="rdesc">"你要非常了解这个行业，信念底气才足，才不会被大砸吓跑。"</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--red-bg);color:var(--red);">X</div><div class="rb"><div class="rname">一天最多1笔主动交易</div><div class="rdesc">避免情绪化连续操作。写下来，想清楚，再按。</div></div></div>
       </div>
-
       <div class="card">
-        <div class="card-title">五阶段生命周期</div>
-        <div class="phase-row"><div class="phase-dot" style="background:#5a5854;"></div><div><div class="phase-name">① 底部放量</div><div class="phase-desc">第一次放量，价格未大涨。主力开始建仓。</div></div></div>
-        <div class="phase-row"><div class="phase-dot" style="background:#7F77DD;"></div><div><div class="phase-name">② 底部横盘吸筹</div><div class="phase-desc">长期低位横盘，几乎没波动。<strong style="color:var(--accent)">最佳买入窗口。</strong></div></div></div>
-        <div class="phase-row"><div class="phase-dot" style="background:#4a9e6b;"></div><div><div class="phase-name">③ 震荡上行</div><div class="phase-desc">缓慢上涨有回调，低点不断抬高。可做T降成本。</div></div></div>
-        <div class="phase-row"><div class="phase-dot" style="background:#c8943a;"></div><div><div class="phase-name">④ 爆拉</div><div class="phase-desc">快速大幅上涨。涨势变缓时开始分批卖出。</div></div></div>
-        <div class="phase-row"><div class="phase-dot" style="background:#c05454;"></div><div><div class="phase-name">⑤ 高位横盘出货</div><div class="phase-desc">高位横盘=主力出货。无论盈亏都应离场。</div></div></div>
+        <div class="ct">五阶段生命周期</div>
+        <div class="pr"><div class="pd" style="background:#5a5854;"></div><div><div class="pname">① 底部放量</div><div class="pdesc">第一次放量，价格未大涨。主力开始建仓。</div></div></div>
+        <div class="pr"><div class="pd" style="background:#7F77DD;"></div><div><div class="pname">② 底部横盘吸筹</div><div class="pdesc">长期低位横盘，几乎没波动。<span style="color:var(--accent)">最佳买入窗口。</span></div></div></div>
+        <div class="pr"><div class="pd" style="background:#4a9e6b;"></div><div><div class="pname">③ 震荡上行</div><div class="pdesc">缓慢上涨有回调，低点不断抬高。可做T降成本。</div></div></div>
+        <div class="pr"><div class="pd" style="background:#c8943a;"></div><div><div class="pname">④ 爆拉</div><div class="pdesc">快速大幅上涨。涨势变缓时开始分批卖出，不等最高点。</div></div></div>
+        <div class="pr"><div class="pd" style="background:#c05454;"></div><div><div class="pname">⑤ 高位横盘出货</div><div class="pdesc">高位横盘=主力出货。无论盈亏都应离场。</div></div></div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- PLAN -->
+<div class="panel" id="panel-plan">
+  <div class="ph"><div class="pt">30天学习计划</div><div class="ps">先观察再交易，建立自己的判断体系。点击任务打勾。</div></div>
+  <div class="g2">
+    <div>
+      <div class="card">
+        <div class="ct">第一周 <span>只看，不买</span></div>
+        <div class="pw">
+          <div class="ptask" id="pt-1-1" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">选定2个板块，每个选3-4只股票建观察清单</div></div>
+          <div class="ptask" id="pt-1-2" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">每天记录5件事：板块涨跌、龙头是谁、目标股位置、成交量变化、今天看不看得懂</div></div>
+          <div class="ptask" id="pt-1-3" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">不下单。目标：建立"看盘语言"</div></div>
+        </div>
+        <div class="ct" style="margin-top:14px;">第二周 <span>开始写机会清单</span></div>
+        <div class="pw">
+          <div class="ptask" id="pt-2-1" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">每天找1只"最像低位反弹"的票：为什么像？如果买，在哪买？如果错了，在哪止损？</div></div>
+          <div class="ptask" id="pt-2-2" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">做"板块周记"：每只股本周位置、量能变化、你的判断、下周验证</div></div>
+          <div class="ptask" id="pt-2-3" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">目标：把模糊直觉写成可验证的规则</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">第三周 <span>小仓位试第一笔</span></div>
+        <div class="pw">
+          <div class="ptask" id="pt-3-1" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">只做你观察了至少2周的股票</div></div>
+          <div class="ptask" id="pt-3-2" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">仓位最多10%，先设好止损和止盈</div></div>
+          <div class="ptask" id="pt-3-3" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">买后不要临时改规则。目标：体验规则执行，不求赚钱</div></div>
+        </div>
+        <div class="ct" style="margin-top:14px;">第四周 <span>复盘这一笔</span></div>
+        <div class="pw">
+          <div class="ptask" id="pt-4-1" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">买入原因是否符合"低位+横盘+转强"？</div></div>
+          <div class="ptask" id="pt-4-2" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">卖出是止盈/止损/乱卖？最大问题是什么？</div></div>
+          <div class="ptask" id="pt-4-3" onclick="togglePT(this)"><div class="ptdot"></div><div class="ptxt">下次只改一条规则。目标：建立自己的第一套小系统</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="ct">每天盘后20分钟固定流程</div>
+        <div class="ri"><div class="rn" style="background:var(--bg4);color:var(--text2);">5'</div><div class="rb"><div class="rname">看两个板块今天整体表现</div><div class="rdesc">涨还是跌，龙头是谁，原因大概是什么</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--bg4);color:var(--text2);">5'</div><div class="rb"><div class="rname">看跟踪的5-8只股票</div><div class="rdesc">截图或记录价格位置：接近年低/横盘/已拉升</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--bg4);color:var(--text2);">5'</div><div class="rb"><div class="rname">记录"今天最像机会"的票</div><div class="rdesc">写下它的名字和你看到的信号</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--bg4);color:var(--text2);">5'</div><div class="rb"><div class="rname">写一句：为什么还不买</div><div class="rdesc">这句话会逼你区分"观察"和"下单"，是最重要的训练</div></div></div>
+      </div>
+      <div class="card">
+        <div class="ct">向他学习：该学什么，不该学什么</div>
+        <div class="ri"><div class="rn" style="background:var(--green-bg);color:var(--green);">学</div><div class="rb"><div class="rname">行业/板块观察方法</div><div class="rdesc">他的行业周期嗅觉是真实能力，值得学习框架，不是结论</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--green-bg);color:var(--green);">学</div><div class="rb"><div class="rname">低位横盘的识别</div><div class="rdesc">他反复使用、相对可执行。圣农、国航都是这套逻辑的真实案例</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--green-bg);color:var(--green);">学</div><div class="rb"><div class="rname">复盘错误的习惯</div><div class="rdesc">每次亏损都反思原因，然后改一条规则。这是他七个月进步的来源</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--red-bg);color:var(--red);">否</div><div class="rb"><div class="rname">"主力在吸筹/出货"的脑补</div><div class="rdesc">太主观，永远不会错但也永远无法进步</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--red-bg);color:var(--red);">否</div><div class="rb"><div class="rname">高频做T</div><div class="rdesc">新手做T通常结果是好票被T飞、坏票越T越深</div></div></div>
+        <div class="ri"><div class="rn" style="background:var(--red-bg);color:var(--red);">否</div><div class="rb"><div class="rname">宏大叙事直接指导买卖</div><div class="rdesc">战争/政治判断可以帮理解行业，但不能直接当买卖按钮</div></div></div>
+      </div>
+      <div class="card">
+        <div class="ct">向他提问的正确方式</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;">
+          <div style="padding:7px 0;border-bottom:1px solid var(--border);">问：<span style="color:var(--text)">你为什么觉得这票是低位，不是半山腰？</span><div style="font-size:11px;color:var(--text3);margin-top:2px;">→ 学位置判断方法</div></div>
+          <div style="padding:7px 0;border-bottom:1px solid var(--border);">问：<span style="color:var(--text)">这个板块的核心逻辑是什么，什么情况下会失效？</span><div style="font-size:11px;color:var(--text3);margin-top:2px;">→ 学框架，不学结论</div></div>
+          <div style="padding:7px 0;">问：<span style="color:var(--text)">你上次卖飞/被套，后来改了什么规则？</span><div style="font-size:11px;color:var(--text3);margin-top:2px;">→ 学真实经验，不学神话</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCES -->
+<div class="panel" id="panel-resources">
+  <div class="ph">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <div><div class="pt">资源站</div><div class="ps">常用链接，拖拽排序，记录上次浏览时间</div></div>
+      <button class="btn bp bs" onclick="OM('modal-add-res')">+ 添加资源</button>
+    </div>
+  </div>
+  <!-- filter tabs -->
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;" id="res-filter-tabs"></div>
+  <div id="res-list"></div>
+</div>
+
 <!-- STATS -->
 <div class="panel" id="panel-stats">
-  <div class="page-header">
-    <div class="page-title">交易统计</div>
-    <div class="page-sub">基于你的交易记录自动计算</div>
+  <div class="ph"><div class="pt">交易统计</div><div class="ps">基于你的交易记录自动计算</div></div>
+  <div class="g4" style="margin-bottom:13px;">
+    <div class="stat"><div class="sv" id="st-total">0</div><div class="sl">总交易次数</div></div>
+    <div class="stat"><div class="sv up" id="st-win">0</div><div class="sl">盈利次数</div></div>
+    <div class="stat"><div class="sv down" id="st-loss">0</div><div class="sl">亏损次数</div></div>
+    <div class="stat"><div class="sv" id="st-winrate">--%</div><div class="sl">胜率</div></div>
   </div>
-  <div class="grid3" style="margin-bottom:20px;">
-    <div class="stat"><div class="stat-val" id="st-total">0</div><div class="stat-lbl">总交易次数</div></div>
-    <div class="stat"><div class="stat-val up" id="st-win">0</div><div class="stat-lbl">盈利次数</div></div>
-    <div class="stat"><div class="stat-val down" id="st-loss">0</div><div class="stat-lbl">亏损次数</div></div>
-    <div class="stat"><div class="stat-val" id="st-winrate">--%</div><div class="stat-lbl">胜率</div></div>
-    <div class="stat"><div class="stat-val up" id="st-avgwin">--</div><div class="stat-lbl">平均盈利%</div></div>
-    <div class="stat"><div class="stat-val down" id="st-avgloss">--</div><div class="stat-lbl">平均亏损%</div></div>
+  <div class="g2" style="margin-bottom:13px;">
+    <div class="stat"><div class="sv up" id="st-avgwin">--</div><div class="sl">平均盈利 %</div></div>
+    <div class="stat"><div class="sv down" id="st-avgloss">--</div><div class="sl">平均亏损 %</div></div>
   </div>
-  <div class="card">
-    <div class="card-title">各股盈亏记录</div>
-    <div id="st-breakdown"></div>
-  </div>
+  <div class="card"><div class="ct">各股盈亏明细</div><div id="st-breakdown"></div></div>
 </div>
 
 </main>
 
 <!-- MODALS -->
-<div class="modal-overlay" id="modal-add-holding">
-  <div class="modal">
-    <div class="modal-title">添加持仓</div>
-    <div class="form-group"><div class="form-label">股票名称 <span class="req">*</span></div><input type="text" id="h-name" placeholder="例：赛轮轮胎"></div>
-    <div class="form-group"><div class="form-label">证券代码</div><input type="text" id="h-code" placeholder="例：601058"></div>
-    <div class="grid2">
-      <div class="form-group"><div class="form-label">持仓数量（股）<span class="req">*</span></div><input type="number" id="h-qty" placeholder="800"></div>
-      <div class="form-group"><div class="form-label">买入均价 <span class="req">*</span></div><input type="number" id="h-cost" placeholder="13.756" step="0.001"></div>
+<div class="mo" id="modal-add-holding">
+  <div class="md">
+    <div class="mdt">添加持仓</div>
+    <div class="fg"><div class="fl">股票名称 <span class="req">*</span></div><input type="text" id="h-name" placeholder="例：赛轮轮胎"></div>
+    <div class="fg"><div class="fl">证券代码</div><input type="text" id="h-code" placeholder="例：601058"></div>
+    <div class="g2">
+      <div class="fg"><div class="fl">持仓数量（股）<span class="req">*</span></div><input type="number" id="h-qty" placeholder="800"></div>
+      <div class="fg"><div class="fl">买入均价 <span class="req">*</span></div><input type="number" id="h-cost" placeholder="13.756" step="0.001"></div>
     </div>
-    <div class="form-group"><div class="form-label">当前价格</div><input type="number" id="h-price" placeholder="13.800" step="0.001"></div>
-    <div class="form-group"><div class="form-label">买入理由（故事）</div><textarea id="h-story" placeholder="为什么买这只股票..." rows="3"></textarea></div>
-    <div class="form-group"><div class="form-label">买入日期</div><input type="date" id="h-date"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="addHolding()">确认添加</button>
-      <button class="btn btn-ghost" onclick="closeModal('modal-add-holding')">取消</button>
-    </div>
+    <div class="fg"><div class="fl">当前价格</div><input type="number" id="h-price" placeholder="13.800" step="0.001"></div>
+    <div class="fg"><div class="fl">是否ST股</div><select id="h-st"><option value="no">否</option><option value="yes">是（会在仓位分析中标红）</option></select></div>
+    <div class="fg"><div class="fl">买入故事（你当时的逻辑）</div><textarea id="h-story" placeholder="为什么买这只股票..." rows="3"></textarea></div>
+    <div class="fg"><div class="fl">买入日期</div><input type="date" id="h-date"></div>
+    <div class="br"><button class="btn bp" onclick="addHolding()">确认添加</button><button class="btn bg" onclick="CM('modal-add-holding')">取消</button></div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modal-add-trade">
-  <div class="modal">
-    <div class="modal-title">新增交易记录</div>
-    <div class="grid2">
-      <div class="form-group"><div class="form-label">股票名称 <span class="req">*</span></div><input type="text" id="t-name" placeholder="例：中国国航"></div>
-      <div class="form-group"><div class="form-label">操作类型</div>
-        <select id="t-type">
-          <option value="buy">买入</option>
-          <option value="sell">卖出</option>
-          <option value="watch">观察</option>
-        </select>
-      </div>
+<div class="mo" id="modal-add-trade">
+  <div class="md">
+    <div class="mdt">新增交易记录</div>
+    <div class="g2">
+      <div class="fg"><div class="fl">股票名称 <span class="req">*</span></div><input type="text" id="t-name" placeholder="例：中国国航"></div>
+      <div class="fg"><div class="fl">操作类型</div><select id="t-type"><option value="buy">买入</option><option value="sell">卖出</option><option value="watch">观察</option></select></div>
     </div>
-    <div class="grid2">
-      <div class="form-group"><div class="form-label">操作日期</div><input type="date" id="t-date"></div>
-      <div class="form-group"><div class="form-label">价格</div><input type="number" id="t-price" placeholder="7.20" step="0.001"></div>
+    <div class="g2">
+      <div class="fg"><div class="fl">操作日期</div><input type="date" id="t-date"></div>
+      <div class="fg"><div class="fl">价格</div><input type="number" id="t-price" placeholder="7.20" step="0.001"></div>
     </div>
-    <div class="form-group"><div class="form-label">买入理由 / 故事 <span class="req">*</span></div><textarea id="t-reason" placeholder="为什么做这个操作？依据什么信号？..." rows="3"></textarea></div>
-    <div class="form-group"><div class="form-label">预期目标</div><input type="text" id="t-target" placeholder="例：涨到8.5出，或者等涨势变缓再出"></div>
-    <div class="form-group"><div class="form-label">止损条件</div><input type="text" id="t-stoploss" placeholder="例：跌破6.5或故事逻辑改变立刻离场"></div>
-    <div class="divider"></div>
-    <div class="form-group"><div class="form-label">事后复盘结果</div>
-      <select id="t-result">
-        <option value="">未复盘</option>
-        <option value="win">盈利</option>
-        <option value="loss">亏损</option>
-        <option value="flat">持平</option>
+    <div class="fg"><div class="fl">买入理由 <span class="req">*</span></div><textarea id="t-reason" placeholder="为什么做这个操作？依据什么信号？..." rows="3"></textarea></div>
+    <div class="fg"><div class="fl">预期目标</div><input type="text" id="t-target" placeholder="涨到8.5出，或等涨势变缓再出"></div>
+    <div class="fg"><div class="fl">止损条件</div><input type="text" id="t-stoploss" placeholder="跌破6.5，或故事逻辑改变立刻离场"></div>
+    <div class="dv"></div>
+    <div class="fg"><div class="fl">事后复盘结果</div><select id="t-result"><option value="">未复盘</option><option value="win">盈利</option><option value="loss">亏损</option><option value="flat">持平</option></select></div>
+    <div class="g2">
+      <div class="fg"><div class="fl">实际盈亏 %</div><input type="number" id="t-pnl" placeholder="+5.2 或 -3.1" step="0.1"></div>
+      <div class="fg"><div class="fl">出场价格</div><input type="number" id="t-exit" placeholder="7.65" step="0.001"></div>
+    </div>
+    <div class="fg"><div class="fl">复盘总结</div><textarea id="t-review" placeholder="判断哪里准了，哪里错了，下次怎么改进..." rows="3"></textarea></div>
+    <div class="br"><button class="btn bp" onclick="addTrade()">保存记录</button><button class="btn bg" onclick="CM('modal-add-trade')">取消</button></div>
+  </div>
+</div>
+
+<div class="mo" id="modal-signal">
+  <div class="md">
+    <div class="mdt" id="signal-modal-title">添加信号</div>
+    <input type="hidden" id="signal-type">
+    <div class="fg"><div class="fl">标题 <span class="req">*</span></div><input type="text" id="sig-title" placeholder="一句话概括"></div>
+    <div class="fg"><div class="fl">详细说明</div><textarea id="sig-desc" placeholder="具体发生了什么，涉及哪只股票，犯了什么规则..." rows="4"></textarea></div>
+    <div class="fg"><div class="fl">日期</div><input type="date" id="sig-date"></div>
+    <div class="br"><button class="btn bp" onclick="addSignal()">保存</button><button class="btn bg" onclick="CM('modal-signal')">取消</button></div>
+  </div>
+</div>
+
+<div class="mo" id="modal-update-holding">
+  <div class="md">
+    <div class="mdt">更新持仓</div>
+    <input type="hidden" id="uh-idx">
+    <div class="fg"><div class="fl">股票</div><input type="text" id="uh-name" disabled></div>
+    <div class="g2">
+      <div class="fg"><div class="fl">当前价格</div><input type="number" id="uh-price" step="0.001"></div>
+      <div class="fg"><div class="fl">是否ST股</div><select id="uh-st"><option value="no">否</option><option value="yes">是</option></select></div>
+    </div>
+    <div class="fg"><div class="fl">备注</div><input type="text" id="uh-note" placeholder="今日异动原因、观察要点..."></div>
+    <div class="br"><button class="btn bp" onclick="updateHoldingPrice()">更新</button><button class="btn bd bs" onclick="removeHolding()">删除持仓</button><button class="btn bg" onclick="CM('modal-update-holding')">取消</button></div>
+  </div>
+</div>
+
+<div class="mo" id="modal-playbook">
+  <div class="md">
+    <div class="mdt">今日个股操盘剧本</div>
+    <div class="fg"><div class="fl">股票名称</div><input type="text" id="pb-name" placeholder="例：ST绝味"></div>
+    <div class="fg"><div class="fl">情况A → 应对</div><input type="text" id="pb-a" placeholder="例：高开冲高 → 减仓20%"></div>
+    <div class="fg"><div class="fl">情况B → 应对</div><input type="text" id="pb-b" placeholder="例：平开震荡 → 不动，守止损"></div>
+    <div class="fg"><div class="fl">情况C → 应对</div><input type="text" id="pb-c" placeholder="例：低开下砸 → 不补仓，跌破XX离场"></div>
+    <div class="br"><button class="btn bp" onclick="savePlaybook()">保存</button><button class="btn bg" onclick="CM('modal-playbook')">取消</button></div>
+  </div>
+</div>
+
+<div class="mo" id="modal-add-res">
+  <div class="md">
+    <div class="mdt" id="res-modal-title">添加资源</div>
+    <input type="hidden" id="res-edit-idx">
+    <div class="fg"><div class="fl">名称 <span class="req">*</span></div><input type="text" id="res-name" placeholder="例：搜狐股市 / 卢本园 / 东方财富"></div>
+    <div class="fg"><div class="fl">链接 <span class="req">*</span></div><input type="text" id="res-url" placeholder="https://..."></div>
+    <div class="fg"><div class="fl">类型</div>
+      <select id="res-type">
+        <option value="行情">行情</option>
+        <option value="资讯">资讯</option>
+        <option value="B站">B站</option>
+        <option value="工具">工具</option>
+        <option value="研报">研报</option>
+        <option value="其他">其他</option>
       </select>
     </div>
-    <div class="grid2">
-      <div class="form-group"><div class="form-label">实际盈亏%</div><input type="number" id="t-pnl" placeholder="+5.2 或 -3.1" step="0.1"></div>
-      <div class="form-group"><div class="form-label">出场价格</div><input type="number" id="t-exit" placeholder="7.65" step="0.001"></div>
-    </div>
-    <div class="form-group"><div class="form-label">复盘总结</div><textarea id="t-review" placeholder="判断哪里准了，哪里错了，下次怎么改进..." rows="3"></textarea></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="addTrade()">保存记录</button>
-      <button class="btn btn-ghost" onclick="closeModal('modal-add-trade')">取消</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-signal">
-  <div class="modal">
-    <div class="modal-title" id="signal-modal-title">添加信号</div>
-    <input type="hidden" id="signal-type">
-    <div class="form-group"><div class="form-label">标题 <span class="req">*</span></div><input type="text" id="sig-title" placeholder="一句话概括"></div>
-    <div class="form-group"><div class="form-label">详细说明</div><textarea id="sig-desc" placeholder="具体发生了什么，涉及哪只股票，犯了什么规则..." rows="4"></textarea></div>
-    <div class="form-group"><div class="form-label">日期</div><input type="date" id="sig-date"></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="addSignal()">保存</button>
-      <button class="btn btn-ghost" onclick="closeModal('modal-signal')">取消</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modal-update-holding">
-  <div class="modal">
-    <div class="modal-title">更新持仓价格</div>
-    <input type="hidden" id="uh-idx">
-    <div class="form-group"><div class="form-label">股票</div><input type="text" id="uh-name" disabled></div>
-    <div class="form-group"><div class="form-label">当前价格</div><input type="number" id="uh-price" step="0.001"></div>
-    <div class="form-group"><div class="form-label">备注（可选）</div><input type="text" id="uh-note" placeholder="今日异动原因、观察要点..."></div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="updateHoldingPrice()">更新</button>
-      <button class="btn btn-danger btn-sm" onclick="removeHolding()">删除持仓</button>
-      <button class="btn btn-ghost" onclick="closeModal('modal-update-holding')">取消</button>
+    <div class="fg"><div class="fl">备注</div><input type="text" id="res-note" placeholder="可选，说明用途..."></div>
+    <div class="br">
+      <button class="btn bp" onclick="saveRes()">保存</button>
+      <button class="btn bg" onclick="CM('modal-add-res')">取消</button>
     </div>
   </div>
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
-const KEY = 'stock_journal_v1';
+const $=id=>document.getElementById(id);
+const KEY='sjv2';
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return{};}}
+function save(d){localStorage.setItem(KEY,JSON.stringify(d));}
+function D(){const d=load();['holdings','trades','signals','tradecards','resources'].forEach(k=>{if(!d[k])d[k]=[];});['today','market','playbooks','plantasks'].forEach(k=>{if(!d[k])d[k]={};});return d;}
 
-function load() {
-  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; }
+function SP(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nt button').forEach(b=>b.classList.remove('active'));
+  $('panel-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  const fn={holdings:renderHoldings,trades:renderTrades,signals:renderSignals,stats:renderStats,tradecard:renderTCs,plan:loadPTs,diary:renderDiary,resources:renderResources};
+  if(fn[id])fn[id]();
 }
-function save(data) {
-  localStorage.setItem(KEY, JSON.stringify(data));
-}
-function getData() {
-  const d = load();
-  if (!d.holdings) d.holdings = [];
-  if (!d.trades) d.trades = [];
-  if (!d.signals) d.signals = [];
-  if (!d.today) d.today = {};
-  if (!d.market) d.market = {};
-  return d;
-}
-
-function showPanel(id) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  $('panel-' + id).classList.add('active');
-  event.target.classList.add('active');
-  if (id === 'holdings') renderHoldings();
-  if (id === 'trades') renderTrades();
-  if (id === 'signals') renderSignals();
-  if (id === 'stats') renderStats();
-}
-
-function openModal(id) {
-  const today = new Date().toISOString().slice(0,10);
-  if (id === 'modal-add-holding') $('h-date').value = today;
-  if (id === 'modal-add-trade') $('t-date').value = today;
+function OM(id){
+  const t=new Date().toISOString().slice(0,10);
+  if(id==='modal-add-holding')$('h-date').value=t;
+  if(id==='modal-add-trade')$('t-date').value=t;
   $(id).classList.add('open');
 }
-function closeModal(id) { $(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(m => {
-  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
-});
+function CM(id){$(id).classList.remove('open');}
+document.querySelectorAll('.mo').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
 
-// DATE
-function initDate() {
-  const d = new Date();
-  const str = d.toLocaleDateString('zh-CN', { year:'numeric', month:'long', day:'numeric', weekday:'long' });
-  $('nav-date').textContent = str;
-  $('today-date-sub').textContent = str;
-}
+function initDate(){const d=new Date();const s=d.toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});$('nav-date').textContent=s;$('today-sub').textContent=s;}
 
-// TODAY
-function saveTodayNote() {
-  const d = getData();
-  const key = new Date().toISOString().slice(0,10);
-  d.today[key] = d.today[key] || {};
-  d.today[key].watchlist = $('today-watchlist').value;
-  d.today[key].action = $('today-action').value;
-  d.today[key].review = $('today-review').value;
-  d.today[key].tomorrow = $('today-tomorrow').value;
-  d.today[key].mood = $('mood').value;
-  save(d);
+function saveTodayNote(){
+  const d=D();const k=new Date().toISOString().slice(0,10);d.today[k]=d.today[k]||{};
+  ['watchlist','action','review','rules','tomorrow'].forEach(id=>{const el=$('today-'+id);if(el)d.today[k][id]=el.value;});
+  d.today[k].mood=$('mood').value;save(d);
 }
-function saveTodayFull() {
-  saveTodayNote();
-  saveMarket();
-  showToast('今日复盘已保存');
+function clearToday(){
+  if(!confirm('清空今日所有复盘内容？'))return;
+  ['today-watchlist','today-action','today-review','today-rules','today-tomorrow'].forEach(id=>$(id).value='');
+  $('mood').value=5;$('mood-val').textContent=5;
+  const d=D();const k=new Date().toISOString().slice(0,10);
+  delete d.today[k];save(d);renderCal();showToast('今日复盘已清空');
 }
-function saveMarket() {
-  const d = getData();
-  const key = new Date().toISOString().slice(0,10);
-  d.market[key] = {
-    sh: $('idx-sh').value,
-    sz: $('idx-sz').value,
-    cy: $('idx-cy').value,
-    chg: $('idx-chg').value
-  };
-  save(d);
-}
-function loadToday() {
-  const d = getData();
-  const key = new Date().toISOString().slice(0,10);
-  const t = d.today[key] || {};
-  const m = d.market[key] || {};
-  if (t.watchlist) $('today-watchlist').value = t.watchlist;
-  if (t.action) $('today-action').value = t.action;
-  if (t.review) $('today-review').value = t.review;
-  if (t.tomorrow) $('today-tomorrow').value = t.tomorrow;
-  if (t.mood) { $('mood').value = t.mood; $('mood-val').textContent = t.mood; }
-  if (m.sh) $('idx-sh').value = m.sh;
-  if (m.sz) $('idx-sz').value = m.sz;
-  if (m.cy) $('idx-cy').value = m.cy;
-  if (m.chg) $('idx-chg').value = m.chg;
+function saveMarket(){const d=D();const k=new Date().toISOString().slice(0,10);d.market[k]={sh:$('idx-sh').value,sz:$('idx-sz').value,cy:$('idx-cy').value,chg:$('idx-chg').value};save(d);}
+function loadToday(){
+  const d=D();const k=new Date().toISOString().slice(0,10);const t=d.today[k]||{};const m=d.market[k]||{};
+  ['watchlist','action','review','rules','tomorrow'].forEach(id=>{const el=$('today-'+id);if(el&&t[id])el.value=t[id];});
+  if(t.mood){$('mood').value=t.mood;$('mood-val').textContent=t.mood;}
+  if(m.sh)$('idx-sh').value=m.sh;if(m.sz)$('idx-sz').value=m.sz;if(m.cy)$('idx-cy').value=m.cy;if(m.chg)$('idx-chg').value=m.chg;
+  if(d.acct){$('acct-total').value=d.acct.total||'';$('acct-cash').value=d.acct.cash||'';}
+  renderPlaybooks();updateHealth();
 }
 
-// HOLDINGS
-function addHolding() {
-  const name = $('h-name').value.trim();
-  const qty = parseFloat($('h-qty').value);
-  const cost = parseFloat($('h-cost').value);
-  if (!name || !qty || !cost) { showToast('请填写必填项', true); return; }
-  const d = getData();
-  d.holdings.push({
-    name, code: $('h-code').value.trim(),
-    qty, cost,
-    price: parseFloat($('h-price').value) || cost,
-    story: $('h-story').value.trim(),
-    date: $('h-date').value,
-    note: ''
+function updateHealth(){
+  const d=D();const total=parseFloat($('acct-total').value)||0;const cash=parseFloat($('acct-cash').value)||0;
+  const pos=total>0?((total-cash)/total*100):0;const cashPct=total>0?(cash/total*100):0;
+  let maxS=0;let hasST=false;
+  d.holdings.forEach(h=>{const mv=h.price*h.qty;const pct=total>0?(mv/total*100):0;if(pct>maxS)maxS=pct;if(h.isST&&pct>=20)hasST=true;});
+  const set=(id,val,ok,warn)=>{$(id).textContent=val;$(id).className='hls '+(parseFloat(val)<=ok?'hok':parseFloat(val)<=warn?'hwarn':'hdanger');};
+  $('h-pos').textContent=pos.toFixed(1)+'%';$('h-pos').className='hls '+(pos<=70?'hok':pos<=80?'hwarn':'hdanger');
+  $('h-single').textContent=maxS.toFixed(1)+'%';$('h-single').className='hls '+(maxS<=25?'hok':maxS<=35?'hwarn':'hdanger');
+  $('h-cash').textContent=cashPct.toFixed(1)+'%';$('h-cash').className='hls '+(cashPct>=20?'hok':cashPct>=10?'hwarn':'hdanger');
+  $('h-st').textContent=hasST?'是 — 警告':'否';$('h-st').className='hls '+(hasST?'hdanger':'hok');
+  d.acct={total,cash};save(d);
+}
+
+function addHolding(){
+  const name=$('h-name').value.trim();const qty=parseFloat($('h-qty').value);const cost=parseFloat($('h-cost').value);
+  if(!name||!qty||!cost){showToast('请填写必填项',true);return;}
+  const d=D();
+  d.holdings.push({name,code:$('h-code').value.trim(),qty,cost,price:parseFloat($('h-price').value)||cost,isST:$('h-st').value==='yes',story:$('h-story').value.trim(),date:$('h-date').value,note:''});
+  save(d);CM('modal-add-holding');['h-name','h-code','h-qty','h-cost','h-price','h-story'].forEach(id=>$(id).value='');
+  renderHoldings();showToast('持仓已添加');
+}
+function renderHoldings(){
+  const d=D();const list=$('holdings-list');
+  if(!d.holdings.length){list.innerHTML='<div class="empty">暂无持仓，点击右上角添加</div>';$('hs-total').textContent='--';$('hs-pnl').textContent='--';$('hs-pnlpct').textContent='--';$('pos-breakdown').innerHTML='';return;}
+  const totalMV=d.holdings.reduce((s,h)=>s+h.price*h.qty,0);let totalCost=0;let posBreak='';
+  list.innerHTML=`<div class="hh"><div>股票</div><div style="text-align:right">现价/成本</div><div style="text-align:right">盈亏</div><div style="text-align:right">仓位</div><div style="text-align:right">操作</div></div>`;
+  d.holdings.forEach((h,i)=>{
+    const mv=h.price*h.qty;const pnl=(h.price-h.cost)*h.qty;const pnlPct=(h.price-h.cost)/h.cost*100;
+    const pos=totalMV>0?(mv/totalMV*100):0;totalCost+=h.cost*h.qty;
+    const cls=pnl>=0?'up':'down';const sign=pnl>=0?'+':'';
+    list.innerHTML+=`<div class="hr"><div><div style="font-weight:500;display:flex;align-items:center;gap:5px;">${h.name}${h.isST?'<span class="tag tr" style="font-size:10px;">ST</span>':''}</div><div style="font-size:11px;color:var(--text3);">${h.code||''} · ${h.qty}股</div></div><div style="text-align:right;"><div>${h.price.toFixed(3)}</div><div style="font-size:11px;color:var(--text3);">${h.cost.toFixed(3)}</div></div><div style="text-align:right;" class="${cls}"><div>${sign}${pnl.toFixed(0)}</div><div style="font-size:11px;">${sign}${pnlPct.toFixed(2)}%</div></div><div style="text-align:right;font-size:12px;color:var(--text2);">${pos.toFixed(1)}%</div><div style="text-align:right;"><button class="btn bg bs" onclick="openUH(${i})">更新</button></div></div>`;
+    const bc=h.isST?'var(--red)':pos>25?'var(--amber)':'var(--green)';
+    posBreak+=`<div class="pmb"><div class="pml"><span>${h.name}</span><span style="color:${bc}">${pos.toFixed(1)}%${h.isST?' (ST)':''}</span></div><div class="pmbg"><div class="pmf" style="width:${Math.min(pos,100)}%;background:${bc};"></div></div></div>`;
   });
-  save(d);
-  closeModal('modal-add-holding');
-  ['h-name','h-code','h-qty','h-cost','h-price','h-story'].forEach(id => $(id).value = '');
-  renderHoldings();
-  showToast('持仓已添加');
+  const tp=totalMV-totalCost;const tpp=totalCost>0?(tp/totalCost*100):0;
+  $('hs-total').textContent='¥'+totalMV.toLocaleString('zh-CN',{maximumFractionDigits:0});
+  $('hs-pnl').textContent=(tp>=0?'+':'')+tp.toFixed(0);$('hs-pnl').className='sv '+(tp>=0?'up':'down');
+  $('hs-pnlpct').textContent=(tpp>=0?'+':'')+tpp.toFixed(2)+'%';$('hs-pnlpct').className='sv '+(tpp>=0?'up':'down');
+  $('pos-breakdown').innerHTML=posBreak;
 }
+function openUH(i){const d=D();const h=d.holdings[i];$('uh-idx').value=i;$('uh-name').value=h.name;$('uh-price').value=h.price;$('uh-note').value=h.note||'';$('uh-st').value=h.isST?'yes':'no';OM('modal-update-holding');}
+function updateHoldingPrice(){const d=D();const i=parseInt($('uh-idx').value);d.holdings[i].price=parseFloat($('uh-price').value)||d.holdings[i].price;d.holdings[i].note=$('uh-note').value;d.holdings[i].isST=$('uh-st').value==='yes';save(d);CM('modal-update-holding');renderHoldings();updateHealth();showToast('持仓已更新');}
+function removeHolding(){if(!confirm('确认删除？'))return;const d=D();d.holdings.splice(parseInt($('uh-idx').value),1);save(d);CM('modal-update-holding');renderHoldings();showToast('已删除');}
 
-function renderHoldings() {
-  const d = getData();
-  const list = $('holdings-list');
-  if (!d.holdings.length) {
-    list.innerHTML = '<div class="empty"><div class="empty-icon">—</div>暂无持仓，点击右上角添加</div>';
-    $('hs-total').textContent = '--';
-    $('hs-pnl').textContent = '--';
-    $('hs-pnlpct').textContent = '--';
-    return;
-  }
-  let totalMV = 0, totalCost = 0;
-  list.innerHTML = `
-    <div class="holding-header">
-      <div>股票</div><div style="text-align:right">现价/成本</div>
-      <div style="text-align:right">盈亏</div><div style="text-align:right">仓位</div>
-      <div style="text-align:right">操作</div>
+// DIARY
+function renderDiary(){
+  const d=D();const keys=Object.keys(d.today).sort().reverse();
+  const cal=$('diary-calendar');
+  if(!keys.length){cal.innerHTML='<div class="empty" style="padding:24px 0;">暂无复盘记录</div>';return;}
+  const moodColor=m=>{const n=parseInt(m)||5;return n<=3?'var(--red)':n<=6?'var(--amber)':'var(--green)';};
+  let html='';let lastMonth='';
+  keys.forEach(k=>{
+    const t=d.today[k]||{};const m=d.market[k]||{};
+    const month=k.slice(0,7);
+    if(month!==lastMonth){html+=`<div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:10px 0 6px;${lastMonth?'margin-top:4px;':''}">${month}</div>`;lastMonth=month;}
+    const hasContent=t.action||t.review||t.watchlist;
+    const mood=t.mood||'5';
+    const chg=m.chg?`<span style="font-size:11px;color:${parseFloat(m.chg)>=0?'var(--green)':'var(--red)'};">${parseFloat(m.chg)>=0?'+':''}${m.chg}%</span>`:'';
+    html+=`<div onclick="showDiaryDay('${k}')" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--rs);cursor:pointer;transition:background .15s;margin-bottom:3px;" onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background='transparent'">
+      <div style="font-size:13px;font-weight:500;color:var(--text);min-width:80px;">${k.slice(5)}</div>
+      <div style="flex:1;font-size:12px;color:var(--text3);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${hasContent?(t.action||t.review||t.watchlist||'').slice(0,40):'（无内容）'}</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        ${chg}
+        <div style="width:8px;height:8px;border-radius:50%;background:${moodColor(mood)};flex-shrink:0;" title="情绪${mood}分"></div>
+      </div>
     </div>`;
-  const totalVal = d.holdings.reduce((s,h) => s + h.price * h.qty, 0);
-  d.holdings.forEach((h, i) => {
-    const mv = h.price * h.qty;
-    const pnl = (h.price - h.cost) * h.qty;
-    const pnlPct = ((h.price - h.cost) / h.cost * 100);
-    const pos = totalVal > 0 ? (mv / totalVal * 100) : 0;
-    totalMV += mv; totalCost += h.cost * h.qty;
-    const cls = pnl >= 0 ? 'up' : 'down';
-    const sign = pnl >= 0 ? '+' : '';
-    list.innerHTML += `
-      <div class="holding-row">
-        <div>
-          <div style="font-weight:500;">${h.name}</div>
-          <div style="font-size:11px;color:var(--text3);">${h.code || ''} · ${h.qty}股</div>
-        </div>
-        <div style="text-align:right;">
-          <div>${h.price.toFixed(3)}</div>
-          <div style="font-size:11px;color:var(--text3);">${h.cost.toFixed(3)}</div>
-        </div>
-        <div style="text-align:right;" class="${cls}">
-          <div>${sign}${pnl.toFixed(0)}</div>
-          <div style="font-size:11px;">${sign}${pnlPct.toFixed(2)}%</div>
-        </div>
-        <div style="text-align:right;font-size:12px;color:var(--text2);">${pos.toFixed(1)}%</div>
-        <div style="text-align:right;">
-          <button class="btn btn-ghost btn-sm" onclick="openUpdateHolding(${i})">更新</button>
-        </div>
-      </div>`;
   });
-  const totalPnl = totalMV - totalCost;
-  const totalPnlPct = totalCost > 0 ? (totalPnl / totalCost * 100) : 0;
-  $('hs-total').textContent = '¥' + totalMV.toLocaleString('zh-CN', {maximumFractionDigits:0});
-  $('hs-pnl').textContent = (totalPnl >= 0 ? '+' : '') + totalPnl.toFixed(0);
-  $('hs-pnl').className = 'stat-val ' + (totalPnl >= 0 ? 'up' : 'down');
-  $('hs-pnlpct').textContent = (totalPnlPct >= 0 ? '+' : '') + totalPnlPct.toFixed(2) + '%';
-  $('hs-pnlpct').className = 'stat-val ' + (totalPnlPct >= 0 ? 'up' : 'down');
+  cal.innerHTML=html;
+}
+function showDiaryDay(k){
+  const d=D();const t=d.today[k]||{};const m=d.market[k]||{};
+  $('diary-detail-date').textContent=k;
+  $('diary-empty-hint').style.display='none';
+  $('diary-detail-card').style.display='block';
+  const field=(label,val)=>val?`<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">${label}</div><div style="font-size:13px;color:var(--text2);line-height:1.6;white-space:pre-wrap;">${val}</div></div>`:'';
+  const moodBar=t.mood?`<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">情绪评分</div><div style="display:flex;align-items:center;gap:10px;"><div style="flex:1;background:var(--bg4);border-radius:3px;height:6px;"><div style="width:${(parseInt(t.mood)/10*100)}%;background:var(--accent);border-radius:3px;height:6px;"></div></div><span style="font-size:13px;font-weight:500;color:var(--accent);">${t.mood}/10</span></div></div>`:'';
+  const mkt=(m.sh||m.chg)?`<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">大盘</div><div style="font-size:13px;color:var(--text2);">上证 ${m.sh||'--'} · 深证 ${m.sz||'--'} · 创业板 ${m.cy||'--'} · 涨跌 <span style="color:${parseFloat(m.chg)>=0?'var(--green)':'var(--red)'};">${m.chg||'--'}%</span></div></div>`:'';
+  $('diary-detail-content').innerHTML=mkt+field('操作记录',t.action)+field('复盘总结',t.review)+field('规则违反',t.rules)+field('板块动态',t.watchlist)+field('明日关注',t.tomorrow)+moodBar;
 }
 
-function openUpdateHolding(i) {
-  const d = getData();
-  const h = d.holdings[i];
-  $('uh-idx').value = i;
-  $('uh-name').value = h.name;
-  $('uh-price').value = h.price;
-  $('uh-note').value = h.note || '';
-  openModal('modal-update-holding');
+// EXPORT / IMPORT
+function exportData(){
+  const data=localStorage.getItem(KEY)||'{}';
+  const blob=new Blob([data],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='stock-journal-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);
+  showToast('备份文件已下载');
 }
-function updateHoldingPrice() {
-  const d = getData();
-  const i = parseInt($('uh-idx').value);
-  d.holdings[i].price = parseFloat($('uh-price').value) || d.holdings[i].price;
-  d.holdings[i].note = $('uh-note').value;
-  save(d); closeModal('modal-update-holding');
-  renderHoldings(); showToast('价格已更新');
-}
-function removeHolding() {
-  if (!confirm('确认删除这条持仓记录？')) return;
-  const d = getData();
-  const i = parseInt($('uh-idx').value);
-  d.holdings.splice(i, 1);
-  save(d); closeModal('modal-update-holding');
-  renderHoldings(); showToast('已删除');
+function importData(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);
+      if(!data.holdings&&!data.trades&&!data.today){showToast('文件格式不正确',true);return;}
+      if(!confirm('导入会覆盖当前所有数据，确认继续？'))return;
+      localStorage.setItem(KEY,JSON.stringify(data));
+      showToast('数据已恢复，即将刷新...');
+      setTimeout(()=>location.reload(),1200);
+    }catch(err){showToast('文件读取失败',true);}
+  };
+  reader.readAsText(file);
 }
 
-// CHECKLIST
-function toggleCheck(item) {
-  const cb = item.querySelector('input[type=checkbox]');
-  cb.checked = !cb.checked;
-  item.querySelector('.check-text').classList.toggle('done', cb.checked);
-  updateCheckScore();
+function TC(item){const cb=item.querySelector('input[type=checkbox]');cb.checked=!cb.checked;item.querySelector('.ct2').classList.toggle('done',cb.checked);updateCS();}
+function updateCS(){
+  const all=document.querySelectorAll('#panel-checklist input[type=checkbox]');
+  const ch=document.querySelectorAll('#panel-checklist input[type=checkbox]:checked');
+  const n=ch.length,t=all.length;$('cl-score').textContent=n+' / '+t;
+  const v=$('cl-verdict');
+  if(n===t){v.textContent='全部满足，可以考虑入场';v.style.color='var(--green)';}
+  else if(n>=10){v.textContent='接近满足，谨慎考虑';v.style.color='var(--amber)';}
+  else if(n>=6){v.textContent='条件不足，继续等待';v.style.color='var(--red)';}
+  else{v.textContent='尚未满足入场条件';v.style.color='var(--text3)';}
 }
-function updateCheckScore() {
-  const all = document.querySelectorAll('#panel-checklist input[type=checkbox]');
-  const checked = document.querySelectorAll('#panel-checklist input[type=checkbox]:checked');
-  const n = checked.length, t = all.length;
-  $('cl-score').textContent = n + ' / ' + t;
-  const v = $('cl-verdict');
-  if (n === t) { v.textContent = '全部满足，可以考虑入场'; v.style.color = 'var(--green)'; }
-  else if (n >= 8) { v.textContent = '接近满足，谨慎考虑'; v.style.color = 'var(--amber)'; }
-  else if (n >= 5) { v.textContent = '条件不足，继续等待'; v.style.color = 'var(--red)'; }
-  else { v.textContent = '尚未满足入场条件'; v.style.color = 'var(--text3)'; }
+function resetChecklist(){
+  document.querySelectorAll('#panel-checklist input[type=checkbox]').forEach(cb=>{cb.checked=false;});
+  document.querySelectorAll('#panel-checklist .ct2').forEach(t=>t.classList.remove('done'));
+  $('cl-stock').value='';
+  ['dtree-q2','dtree-q2-opts'].forEach(id=>$(id).style.display='none');
+  $('dtree-result').className='dtr';
+  document.querySelectorAll('.dtb').forEach(b=>b.classList.remove('sel'));
+  updateCS();
 }
-function resetChecklist() {
-  document.querySelectorAll('#panel-checklist input[type=checkbox]').forEach(cb => { cb.checked = false; });
-  document.querySelectorAll('#panel-checklist .check-text').forEach(t => t.classList.remove('done'));
-  $('cl-stock').value = '';
-  updateCheckScore();
-}
-function saveChecklistRecord() {
-  const stock = $('cl-stock').value.trim();
-  if (!stock) { showToast('请填写股票名称', true); return; }
-  const checked = document.querySelectorAll('#panel-checklist input[type=checkbox]:checked').length;
-  const total = document.querySelectorAll('#panel-checklist input[type=checkbox]').length;
-  const d = getData();
-  if (!d.checklist_records) d.checklist_records = [];
-  d.checklist_records.push({ stock, score: checked + '/' + total, date: new Date().toISOString().slice(0,10) });
-  save(d);
-  showToast('检查记录已保存');
+function saveChecklistRecord(){
+  const stock=$('cl-stock').value.trim();if(!stock){showToast('请填写股票名称',true);return;}
+  const ch=document.querySelectorAll('#panel-checklist input[type=checkbox]:checked').length;
+  const t=document.querySelectorAll('#panel-checklist input[type=checkbox]').length;
+  const d=D();if(!d.cl_records)d.cl_records=[];
+  d.cl_records.push({stock,score:ch+'/'+t,date:new Date().toISOString().slice(0,10)});
+  save(d);showToast('检查记录已保存');
 }
 
-// TRADES
-function addTrade() {
-  const name = $('t-name').value.trim();
-  const reason = $('t-reason').value.trim();
-  if (!name || !reason) { showToast('请填写必填项', true); return; }
-  const d = getData();
-  d.trades.unshift({
-    name, type: $('t-type').value,
-    date: $('t-date').value,
-    price: parseFloat($('t-price').value) || null,
-    reason, target: $('t-target').value,
-    stoploss: $('t-stoploss').value,
-    result: $('t-result').value,
-    pnl: parseFloat($('t-pnl').value) || null,
-    exit: parseFloat($('t-exit').value) || null,
-    review: $('t-review').value
-  });
-  save(d);
-  closeModal('modal-add-trade');
-  ['t-name','t-price','t-reason','t-target','t-stoploss','t-pnl','t-exit','t-review'].forEach(id => $(id).value = '');
-  $('t-type').value = 'buy'; $('t-result').value = '';
-  renderTrades(); showToast('记录已保存');
-}
-
-function renderTrades() {
-  const d = getData();
-  const list = $('trades-list');
-  if (!d.trades.length) {
-    list.innerHTML = '<div class="empty"><div class="empty-icon">—</div>暂无交易记录，点击右上角添加</div>';
-    return;
+let dtS={q1:null,q2:null};
+function dtree(q,val,btn){
+  dtS[q]=val;btn.parentElement.querySelectorAll('.dtb').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');
+  const res=$('dtree-result');
+  if(q==='q1'){
+    if(val==='no'){res.innerHTML='<strong style="color:var(--amber)">最多10%仓位</strong><br><span style="font-size:12px;color:var(--text2)">完全跟随他人时，仓位上限10%。先用小钱练手。</span>';res.className='dtr show';res.style.background='var(--amber-bg)';$('dtree-q2').style.display='none';$('dtree-q2-opts').style.display='none';}
+    else{$('dtree-q2').style.display='block';$('dtree-q2-opts').style.display='flex';res.className='dtr';}
   }
-  const typeLabel = { buy:'买入', sell:'卖出', watch:'观察' };
-  const typeTag = { buy:'tag-amber', sell:'tag-gray', watch:'tag-gray' };
-  const resultTag = { win:'tag-green', loss:'tag-red', flat:'tag-gray', '':'tag-gray' };
-  const resultLabel = { win:'盈利', loss:'亏损', flat:'持平', '':'未复盘' };
-  list.innerHTML = d.trades.map((t, i) => `
-    <div class="trade-item">
-      <div class="trade-header">
-        <span class="trade-name">${t.name}</span>
-        <span class="tag ${typeTag[t.type]}">${typeLabel[t.type]}</span>
-        ${t.result ? `<span class="tag ${resultTag[t.result]}">${resultLabel[t.result]}${t.pnl !== null ? ' ' + (t.pnl >= 0 ? '+' : '') + t.pnl + '%' : ''}</span>` : '<span class="tag tag-gray">待复盘</span>'}
-        <span class="trade-meta">${t.date || ''} ${t.price ? '@ ' + t.price : ''}</span>
+  if(q==='q2'){
+    if(dtS.q1==='yes'&&val==='yes'){res.innerHTML='<strong style="color:var(--green)">最多25%仓位</strong><br><span style="font-size:12px;color:var(--text2)">完全自判+愿意承受止损，可到25%上限。</span>';res.style.background='var(--green-bg)';}
+    else if(dtS.q1==='partial'&&val==='yes'){res.innerHTML='<strong style="color:var(--green)">最多15%仓位</strong><br><span style="font-size:12px;color:var(--text2)">跟随+理解部分，仓位15%。</span>';res.style.background='var(--green-bg)';}
+    else{res.innerHTML='<strong style="color:var(--red)">暂不入场</strong><br><span style="font-size:12px;color:var(--text2)">不愿意承受止损说明信念不够。先观察，不买。</span>';res.style.background='var(--red-bg)';}
+    res.className='dtr show';
+  }
+}
+
+function saveTradeCard(){
+  const name=$('tc-name').value.trim();const reason=$('tc-reason').value.trim();const trigger=$('tc-trigger').value.trim();
+  if(!name||!reason||!trigger){showToast('请填写必填项',true);return;}
+  const d=D();
+  d.tradecards.unshift({name,reason,trigger,stop:$('tc-stop').value,exit:$('tc-exit').value,pos:$('tc-pos').value,price:$('tc-price').value,date:new Date().toISOString().slice(0,10),done:false});
+  save(d);['tc-name','tc-reason','tc-trigger','tc-stop','tc-exit','tc-pos','tc-price'].forEach(id=>$(id).value='');
+  renderTCs();showToast('交易卡已保存');
+}
+function renderTCs(){
+  const d=D();const list=$('tc-list');
+  if(!d.tradecards.length){list.innerHTML='<div class="empty">暂无交易卡</div>';return;}
+  list.innerHTML=d.tradecards.map((tc,i)=>`
+    <div class="pbi" style="${tc.done?'opacity:.5':''}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
+        <span style="font-size:14px;font-weight:500;color:var(--text);">${tc.name}</span>
+        <div style="display:flex;gap:5px;">${tc.pos?`<span class="tag ta">${tc.pos}%仓</span>`:''}<span class="tag tgr">${tc.date}</span></div>
       </div>
-      <div class="trade-body">
-        <strong>买入理由：</strong>${t.reason}<br>
-        ${t.target ? `<strong>目标：</strong>${t.target}<br>` : ''}
-        ${t.stoploss ? `<strong>止损：</strong>${t.stoploss}` : ''}
-      </div>
-      ${t.review ? `<div class="trade-result"><div class="trade-result-item"><span>复盘：</span>${t.review}</div></div>` : ''}
-      <div class="trade-actions">
-        <button class="btn btn-ghost btn-sm" onclick="editTradeResult(${i})">更新复盘</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteTrade(${i})">删除</button>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:2px;">买入理由</div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:7px;">${tc.reason}</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:2px;">触发条件</div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:7px;">${tc.trigger}</div>
+      ${tc.stop?`<div style="font-size:12px;"><span style="color:var(--red)">止损：</span><span style="color:var(--text2)">${tc.stop}</span></div>`:''}
+      ${tc.exit?`<div style="font-size:12px;margin-top:2px;"><span style="color:var(--green)">止盈：</span><span style="color:var(--text2)">${tc.exit}</span></div>`:''}
+      <div style="margin-top:9px;display:flex;gap:6px;">
+        <button class="btn bg bs" onclick="toggleTC(${i})">${tc.done?'标为未完成':'标为已执行'}</button>
+        <button class="btn bd bs" onclick="deleteTC(${i})">删除</button>
       </div>
     </div>`).join('');
 }
+function toggleTC(i){const d=D();d.tradecards[i].done=!d.tradecards[i].done;save(d);renderTCs();}
+function deleteTC(i){if(!confirm('确认删除？'))return;const d=D();d.tradecards.splice(i,1);save(d);renderTCs();}
 
-function editTradeResult(i) {
-  const d = getData();
-  const t = d.trades[i];
-  const result = prompt('结果（win/loss/flat）:', t.result || '');
-  if (result === null) return;
-  const pnl = prompt('盈亏%（如+5.2或-3.1）:', t.pnl || '');
-  const review = prompt('复盘总结:', t.review || '');
-  d.trades[i].result = result;
-  d.trades[i].pnl = parseFloat(pnl) || null;
-  d.trades[i].review = review;
-  save(d); renderTrades(); showToast('复盘已更新');
+function addTrade(){
+  const name=$('t-name').value.trim();const reason=$('t-reason').value.trim();
+  if(!name||!reason){showToast('请填写必填项',true);return;}
+  const d=D();
+  d.trades.unshift({name,type:$('t-type').value,date:$('t-date').value,price:parseFloat($('t-price').value)||null,reason,target:$('t-target').value,stoploss:$('t-stoploss').value,result:$('t-result').value,pnl:parseFloat($('t-pnl').value)||null,exit:parseFloat($('t-exit').value)||null,review:$('t-review').value});
+  save(d);CM('modal-add-trade');['t-name','t-price','t-reason','t-target','t-stoploss','t-pnl','t-exit','t-review'].forEach(id=>$(id).value='');$('t-type').value='buy';$('t-result').value='';
+  renderTrades();showToast('记录已保存');
+}
+function renderTrades(){
+  const d=D();const list=$('trades-list');
+  if(!d.trades.length){list.innerHTML='<div class="empty">暂无交易记录，点击右上角添加</div>';return;}
+  const tl={buy:'买入',sell:'卖出',watch:'观察'};const tt={buy:'ta',sell:'tgr',watch:'tgr'};
+  const rl={win:'盈利',loss:'亏损',flat:'持平','':'待复盘'};const rt={win:'tg',loss:'tr',flat:'tgr','':'tgr'};
+  list.innerHTML=d.trades.map((t,i)=>`
+    <div class="ti"><div class="th">
+      <span class="tn">${t.name}</span>
+      <span class="tag ${tt[t.type]}">${tl[t.type]}</span>
+      <span class="tag ${rt[t.result]}">${rl[t.result]}${t.pnl!=null?' '+(t.pnl>=0?'+':'')+t.pnl+'%':''}</span>
+      <span class="tm">${t.date||''} ${t.price?'@ '+t.price:''}</span>
+    </div>
+    <div class="tb2"><strong>理由：</strong>${t.reason}${t.target?`<br><strong>目标：</strong>${t.target}`:''}${t.stoploss?`<br><strong>止损：</strong>${t.stoploss}`:''}</div>
+    ${t.review?`<div style="margin-top:7px;padding-top:7px;border-top:1px solid var(--border);font-size:12px;color:var(--text3);">复盘：<span style="color:var(--text2)">${t.review}</span></div>`:''}
+    <div class="ta2"><button class="btn bg bs" onclick="editTR(${i})">更新复盘</button><button class="btn bd bs" onclick="deleteTrade(${i})">删除</button></div>
+    </div>`).join('');
+}
+function editTR(i){const d=D();const t=d.trades[i];const r=prompt('结果（win/loss/flat）:',t.result||'');if(r===null)return;const p=prompt('盈亏%:',t.pnl||'');const rv=prompt('复盘总结:',t.review||'');d.trades[i].result=r;d.trades[i].pnl=parseFloat(p)||null;d.trades[i].review=rv;save(d);renderTrades();showToast('复盘已更新');}
+function deleteTrade(i){if(!confirm('确认删除？'))return;const d=D();d.trades.splice(i,1);save(d);renderTrades();showToast('已删除');}
+
+function openSignalModal(type){$('signal-type').value=type;$('signal-modal-title').textContent=type==='red'?'添加红色信号·重大错误':'添加绿色信号·正确判断';$('sig-date').value=new Date().toISOString().slice(0,10);OM('modal-signal');}
+function addSignal(){
+  const title=$('sig-title').value.trim();if(!title){showToast('请填写标题',true);return;}
+  const d=D();d.signals.unshift({type:$('signal-type').value,title,desc:$('sig-desc').value,date:$('sig-date').value});
+  save(d);CM('modal-signal');['sig-title','sig-desc'].forEach(id=>$(id).value='');renderSignals();showToast('信号已记录');
+}
+function renderSignals(){
+  const d=D();const rs=d.signals.filter(s=>s.type==='red');const gs=d.signals.filter(s=>s.type==='green');
+  $('signals-red').innerHTML=rs.length?rs.map(s=>`<div class="si sr"><div style="flex:1;"><div class="st">${s.title}</div>${s.desc?`<div class="sd">${s.desc}</div>`:''}<div class="sdate">${s.date}</div></div></div>`).join(''):'<div class="empty" style="padding:20px 0;">暂无红色信号</div>';
+  $('signals-green').innerHTML=gs.length?gs.map(s=>`<div class="si sg"><div style="flex:1;"><div class="st">${s.title}</div>${s.desc?`<div class="sd">${s.desc}</div>`:''}<div class="sdate">${s.date}</div></div></div>`).join(''):'<div class="empty" style="padding:20px 0;">暂无绿色信号</div>';
 }
 
-function deleteTrade(i) {
-  if (!confirm('确认删除？')) return;
-  const d = getData();
-  d.trades.splice(i, 1);
-  save(d); renderTrades(); showToast('已删除');
+function savePlaybook(){
+  const name=$('pb-name').value.trim();if(!name){showToast('请填写股票名',true);return;}
+  const d=D();const k=new Date().toISOString().slice(0,10);if(!d.playbooks[k])d.playbooks[k]=[];
+  d.playbooks[k]=d.playbooks[k].filter(p=>p.name!==name);
+  d.playbooks[k].push({name,a:$('pb-a').value,b:$('pb-b').value,c:$('pb-c').value});
+  save(d);CM('modal-playbook');['pb-name','pb-a','pb-b','pb-c'].forEach(id=>$(id).value='');renderPlaybooks();showToast('剧本已保存');
+}
+function renderPlaybooks(){
+  const d=D();const list=$('playbook-list');const k=new Date().toISOString().slice(0,10);const pbs=d.playbooks[k]||[];
+  if(!pbs.length){list.innerHTML='<div style="font-size:12px;color:var(--text3);padding:6px 0;">今日暂无剧本</div>';return;}
+  list.innerHTML=pbs.map(p=>`<div class="pbi"><div class="pbs">${p.name}</div>${p.a?`<div class="pbsc"><span class="pbcond">情况A：</span><span class="pbact">${p.a}</span></div>`:''} ${p.b?`<div class="pbsc"><span class="pbcond">情况B：</span><span class="pbact">${p.b}</span></div>`:''} ${p.c?`<div class="pbsc"><span class="pbcond">情况C：</span><span class="pbact">${p.c}</span></div>`:''}</div>`).join('');
 }
 
-// SIGNALS
-function openSignalModal(type) {
-  $('signal-type').value = type;
-  $('signal-modal-title').textContent = type === 'red' ? '添加红色信号·重大错误' : '添加绿色信号·正确判断';
-  $('sig-date').value = new Date().toISOString().slice(0,10);
-  openModal('modal-signal');
-}
-function addSignal() {
-  const title = $('sig-title').value.trim();
-  if (!title) { showToast('请填写标题', true); return; }
-  const d = getData();
-  d.signals.unshift({
-    type: $('signal-type').value,
-    title, desc: $('sig-desc').value,
-    date: $('sig-date').value
+function loadPTs(){
+  const d=D();
+  document.querySelectorAll('.ptask').forEach(task=>{
+    if(d.plantasks[task.id]){task.querySelector('.ptdot').style.background='var(--green)';task.querySelector('.ptxt').style.cssText='text-decoration:line-through;color:var(--text3);';}
   });
-  save(d);
-  closeModal('modal-signal');
-  ['sig-title','sig-desc'].forEach(id => $(id).value = '');
-  renderSignals(); showToast('信号已记录');
 }
-function renderSignals() {
-  const d = getData();
-  const reds = d.signals.filter(s => s.type === 'red');
-  const greens = d.signals.filter(s => s.type === 'green');
-  $('signals-red').innerHTML = reds.length ? reds.map((s,i) => `
-    <div class="signal-item signal-red">
-      <div style="flex:1;">
-        <div class="signal-title">${s.title}</div>
-        ${s.desc ? `<div class="signal-desc">${s.desc}</div>` : ''}
-        <div class="signal-date">${s.date}</div>
-      </div>
-    </div>`).join('') : '<div class="empty" style="padding:24px 0;">暂无红色信号</div>';
-  $('signals-green').innerHTML = greens.length ? greens.map((s,i) => `
-    <div class="signal-item signal-green">
-      <div style="flex:1;">
-        <div class="signal-title">${s.title}</div>
-        ${s.desc ? `<div class="signal-desc">${s.desc}</div>` : ''}
-        <div class="signal-date">${s.date}</div>
-      </div>
-    </div>`).join('') : '<div class="empty" style="padding:24px 0;">暂无绿色信号</div>';
+function togglePT(el){
+  const d=D();const done=!d.plantasks[el.id];d.plantasks[el.id]=done;save(d);
+  el.querySelector('.ptdot').style.background=done?'var(--green)':'var(--text3)';
+  el.querySelector('.ptxt').style.cssText=done?'text-decoration:line-through;color:var(--text3);':'';
 }
 
-// STATS
-function renderStats() {
-  const d = getData();
-  const completed = d.trades.filter(t => t.result && t.result !== '');
-  const wins = completed.filter(t => t.result === 'win');
-  const losses = completed.filter(t => t.result === 'loss');
-  $('st-total').textContent = d.trades.length;
-  $('st-win').textContent = wins.length;
-  $('st-loss').textContent = losses.length;
-  $('st-winrate').textContent = completed.length ? Math.round(wins.length / completed.length * 100) + '%' : '--%';
-  const avgWin = wins.filter(t => t.pnl !== null).reduce((s,t) => s + t.pnl, 0) / (wins.filter(t => t.pnl !== null).length || 1);
-  const avgLoss = losses.filter(t => t.pnl !== null).reduce((s,t) => s + t.pnl, 0) / (losses.filter(t => t.pnl !== null).length || 1);
-  $('st-avgwin').textContent = wins.length ? '+' + avgWin.toFixed(1) + '%' : '--';
-  $('st-avgloss').textContent = losses.length ? avgLoss.toFixed(1) + '%' : '--';
-  const breakdown = $('st-breakdown');
-  if (!completed.length) { breakdown.innerHTML = '<div class="empty">暂无已复盘的交易记录</div>'; return; }
-  const byStock = {};
-  completed.forEach(t => {
-    if (!byStock[t.name]) byStock[t.name] = [];
-    byStock[t.name].push(t);
-  });
-  breakdown.innerHTML = Object.entries(byStock).map(([name, trades]) => {
-    const w = trades.filter(t => t.result === 'win').length;
-    const l = trades.filter(t => t.result === 'loss').length;
-    const pnls = trades.filter(t => t.pnl !== null).map(t => t.pnl);
-    const totalPnl = pnls.reduce((s,p) => s + p, 0);
-    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;">
-      <span style="font-weight:500;">${name}</span>
-      <span style="color:var(--text3);">${trades.length}次 · ${w}赢${l}负</span>
-      <span class="${totalPnl >= 0 ? 'up' : 'down'}">${totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(1)}%</span>
-    </div>`;
+function renderStats(){
+  const d=D();const comp=d.trades.filter(t=>t.result&&t.result!=='');const wins=comp.filter(t=>t.result==='win');const losses=comp.filter(t=>t.result==='loss');
+  $('st-total').textContent=d.trades.length;$('st-win').textContent=wins.length;$('st-loss').textContent=losses.length;
+  $('st-winrate').textContent=comp.length?Math.round(wins.length/comp.length*100)+'%':'--%';
+  const aw=wins.filter(t=>t.pnl!=null).reduce((s,t)=>s+t.pnl,0)/(wins.filter(t=>t.pnl!=null).length||1);
+  const al=losses.filter(t=>t.pnl!=null).reduce((s,t)=>s+t.pnl,0)/(losses.filter(t=>t.pnl!=null).length||1);
+  $('st-avgwin').textContent=wins.length?'+'+aw.toFixed(1)+'%':'--';
+  $('st-avgloss').textContent=losses.length?al.toFixed(1)+'%':'--';
+  const bd=$('st-breakdown');if(!comp.length){bd.innerHTML='<div class="empty">暂无已复盘的交易记录</div>';return;}
+  const by={};comp.forEach(t=>{if(!by[t.name])by[t.name]=[];by[t.name].push(t);});
+  bd.innerHTML=Object.entries(by).map(([name,ts])=>{
+    const w=ts.filter(t=>t.result==='win').length;const l=ts.filter(t=>t.result==='loss').length;
+    const tp=ts.filter(t=>t.pnl!=null).reduce((s,t)=>s+t.pnl,0);
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="font-weight:500;">${name}</span><span style="color:var(--text3);">${ts.length}次 · ${w}赢${l}负</span><span class="${tp>=0?'up':'down'}">${tp>=0?'+':''}${tp.toFixed(1)}%</span></div>`;
   }).join('');
 }
 
-// TOAST
-function showToast(msg, isErr) {
-  const t = document.createElement('div');
-  t.textContent = msg;
-  t.style.cssText = `position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
-    background:${isErr ? 'var(--red-bg)' : 'var(--bg4)'};
-    color:${isErr ? 'var(--red)' : 'var(--text)'};
-    border:1px solid ${isErr ? 'var(--red)' : 'var(--border2)'};
-    padding:10px 20px;border-radius:8px;font-size:13px;
-    z-index:9999;animation:fadeIn 0.2s ease;`;
-  document.body.appendChild(t);
-  setTimeout(() => t.remove(), 2200);
+function showToast(msg,isErr){
+  const t=document.createElement('div');t.textContent=msg;
+  t.style.cssText=`position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:${isErr?'var(--red-bg)':'var(--bg4)'};color:${isErr?'var(--red)':'var(--text)'};border:1px solid ${isErr?'var(--red)':'var(--border2)'};padding:9px 18px;border-radius:8px;font-size:13px;z-index:9999;animation:fi .2s ease;`;
+  document.body.appendChild(t);setTimeout(()=>t.remove(),2200);
 }
 
-// INIT
-initDate();
-loadToday();
+// CALENDAR
+let calYear=new Date().getFullYear();
+let calMonth=new Date().getMonth();
+let calSelectedKey=null;
+const CAL_DAYS=['日','一','二','三','四','五','六'];
+
+function renderCal(){
+  const d=D();
+  const today=new Date();
+  const todayKey=today.toISOString().slice(0,10);
+  const firstDay=new Date(calYear,calMonth,1);
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const startDow=firstDay.getDay();
+  $('cal-month-label').textContent=`${calYear}年${calMonth+1}月`;
+  // day-of-week headers
+  $('cal-dow-row').innerHTML=CAL_DAYS.map(d=>`<div style="font-size:9px;color:var(--text3);text-align:center;padding:1px 0;">${d}</div>`).join('');
+  // day cells
+  let html='';
+  for(let i=0;i<startDow;i++) html+=`<div></div>`;
+  for(let day=1;day<=daysInMonth;day++){
+    const key=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const entry=d.today[key];
+    const hasEntry=entry&&(entry.action||entry.review||entry.watchlist);
+    const isToday=key===todayKey;
+    const isSel=key===calSelectedKey;
+    const mood=entry?.mood;
+    const dot=mood?(parseInt(mood)<=3?'#c05454':parseInt(mood)<=6?'#c8943a':'#4a9e6b'):'';
+    const bg=isSel?'var(--accent2)':hasEntry?'var(--bg3)':'transparent';
+    const color=isSel?'var(--accent)':isToday?'var(--accent)':hasEntry?'var(--text)':'var(--text3)';
+    const fw=isToday?'500':'400';
+    html+=`<div onclick="${hasEntry?`calSelect('${key}')`:`calDim('${key}')`}"
+      style="height:22px;display:flex;align-items:center;justify-content:center;border-radius:4px;font-size:11px;cursor:${hasEntry?'pointer':'default'};background:${bg};color:${color};font-weight:${fw};position:relative;"
+      ${hasEntry?'title="点击查看记录"':''}>
+      ${day}
+      ${dot?`<span style="position:absolute;top:1px;right:1px;width:3px;height:3px;border-radius:50%;background:${dot};"></span>`:''}
+      ${isToday&&!isSel?`<span style="position:absolute;bottom:1px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--accent);"></span>`:''}
+    </div>`;
+  }
+  $('cal-grid').innerHTML=html;
+}
+function calSelect(key){
+  calSelectedKey=key;renderCal();
+  const d=D();const t=d.today[key]||{};const m=d.market[key]||{};
+  const prev=$('cal-preview');
+  const field=(label,val)=>val?`<div style="margin-bottom:7px;"><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px;">${label}</div><div style="font-size:12px;color:var(--text2);line-height:1.5;white-space:pre-wrap;">${val}</div></div>`:'';
+  const mkt=m.chg?`<div style="font-size:11px;color:var(--text3);margin-bottom:7px;">上证${m.sh||'--'} <span style="color:${parseFloat(m.chg||0)>=0?'#4a9e6b':'#c05454'};">${m.chg}%</span></div>`:'';
+  prev.style.display='block';
+  prev.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <span style="font-size:12px;font-weight:500;color:var(--text);">${key}</span>
+    <button class="cal-nav" onclick="calSelectedKey=null;$('cal-preview').style.display='none';renderCal()">✕</button>
+  </div>${mkt}${field('操作',t.action)}${field('复盘',t.review)}${field('规则',t.rules)}${field('板块',t.watchlist)}${field('明日',t.tomorrow)}${t.mood?`<div style="display:flex;align-items:center;gap:6px;margin-top:4px;"><span style="font-size:10px;color:var(--text3);">情绪</span><div style="flex:1;background:var(--bg4);border-radius:2px;height:3px;"><div style="width:${parseInt(t.mood)/10*100}%;background:var(--accent);border-radius:2px;height:3px;"></div></div><span style="font-size:11px;color:var(--accent);">${t.mood}</span></div>`:''}`;
+}
+function calDim(key){calSelectedKey=null;$('cal-preview').style.display='none';renderCal();}
+function calPrev(){if(calMonth===0){calMonth=11;calYear--;}else calMonth--;calSelectedKey=null;$('cal-preview').style.display='none';renderCal();}
+function calNext(){if(calMonth===11){calMonth=0;calYear++;}else calMonth++;calSelectedKey=null;$('cal-preview').style.display='none';renderCal();}
+
+// RESOURCES
+const RES_TYPE_COLORS={
+  '行情':'#378ADD;background:#E6F1FB',
+  '资讯':'#c8943a;background:#FAEEDA',
+  'B站':'#E24B4A;background:#FCEBEB',
+  '工具':'#4a9e6b;background:#EAF3DE',
+  '研报':'#7F77DD;background:#EEEDFE',
+  '其他':'#888780;background:#F1EFE8',
+};
+function resTypeStyle(type){
+  const c=RES_TYPE_COLORS[type]||RES_TYPE_COLORS['其他'];
+  const[color,bg]=c.split(';background:');
+  return `color:#${color.replace('#','')};background:#${bg}`;
+}
+function renderResources(){
+  const d=D();
+  const types=['全部',...new Set(d.resources.map(r=>r.type))];
+  const activeFilter=window._resFilter||'全部';
+  $('res-filter-tabs').innerHTML=types.map(t=>`<button class="btn bs ${t===activeFilter?'bp':'bg'}" onclick="window._resFilter='${t}';renderResources()">${t}</button>`).join('');
+  const filtered=activeFilter==='全部'?d.resources:d.resources.filter(r=>r.type===activeFilter);
+  if(!filtered.length){$('res-list').innerHTML='<div class="empty">暂无资源，点击右上角添加</div>';return;}
+  $('res-list').innerHTML=filtered.map((r,fi)=>{
+    const i=d.resources.indexOf(r);
+    const visited=r.lastVisited?timeSince(r.lastVisited):'从未访问';
+    const tc=RES_TYPE_COLORS[r.type]||RES_TYPE_COLORS['其他'];
+    const[color,bg]=tc.split(';background:');
+    return `<div class="res-row" draggable="true" data-idx="${i}"
+      ondragstart="resDragStart(event,${i})" ondragover="resDragOver(event)" ondrop="resDrop(event,${i})" ondragleave="resDragLeave(event)">
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span class="res-drag" title="拖拽排序">⠿</span>
+        <span class="res-type" style="color:${color};background:${bg};">${r.type}</span>
+      </div>
+      <div class="res-info">
+        <div class="res-name">${r.name}${r.note?`<span style="font-size:11px;color:var(--text3);margin-left:6px;">${r.note}</span>`:''}</div>
+        <div class="res-url">${r.url}</div>
+      </div>
+      <div class="res-visited">${visited}</div>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        <button class="btn bp bs" onclick="openRes(${i})">访问</button>
+        <button class="btn bg bs" onclick="editRes(${i})">编辑</button>
+        <button class="btn bd bs" onclick="deleteRes(${i})">删除</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function timeSince(iso){
+  const diff=Date.now()-new Date(iso).getTime();
+  const m=Math.floor(diff/60000);
+  if(m<1)return '刚刚';if(m<60)return m+'分钟前';
+  const h=Math.floor(m/60);if(h<24)return h+'小时前';
+  const day=Math.floor(h/24);if(day<30)return day+'天前';
+  return new Date(iso).toLocaleDateString('zh-CN',{month:'short',day:'numeric'});
+}
+function openRes(i){
+  const d=D();d.resources[i].lastVisited=new Date().toISOString();save(d);
+  window.open(d.resources[i].url,'_blank');renderResources();
+}
+function saveRes(){
+  const name=$('res-name').value.trim();const url=$('res-url').value.trim();
+  if(!name||!url){showToast('请填写名称和链接',true);return;}
+  const d=D();
+  const editIdx=parseInt($('res-edit-idx').value);
+  const item={name,url,type:$('res-type').value,note:$('res-note').value.trim(),lastVisited:null};
+  if(!isNaN(editIdx)&&editIdx>=0){item.lastVisited=d.resources[editIdx].lastVisited;d.resources[editIdx]=item;}
+  else d.resources.push(item);
+  save(d);CM('modal-add-res');
+  ['res-name','res-url','res-note'].forEach(id=>$(id).value='');$('res-edit-idx').value='';
+  renderResources();showToast('资源已保存');
+}
+function editRes(i){
+  const d=D();const r=d.resources[i];
+  $('res-modal-title').textContent='编辑资源';$('res-edit-idx').value=i;
+  $('res-name').value=r.name;$('res-url').value=r.url;$('res-type').value=r.type;$('res-note').value=r.note||'';
+  OM('modal-add-res');
+}
+function deleteRes(i){
+  if(!confirm('确认删除？'))return;
+  const d=D();d.resources.splice(i,1);save(d);renderResources();showToast('已删除');
+}
+// DRAG & DROP for resources
+let dragSrcIdx=null;
+function resDragStart(e,i){dragSrcIdx=i;e.currentTarget.classList.add('dragging');}
+function resDragOver(e){e.preventDefault();e.currentTarget.classList.add('drag-over');}
+function resDragLeave(e){e.currentTarget.classList.remove('drag-over');}
+function resDrop(e,targetIdx){
+  e.preventDefault();e.currentTarget.classList.remove('drag-over');
+  if(dragSrcIdx===null||dragSrcIdx===targetIdx)return;
+  const d=D();const items=d.resources;
+  const [moved]=items.splice(dragSrcIdx,1);items.splice(targetIdx,0,moved);
+  save(d);dragSrcIdx=null;renderResources();
+}
+
+// THEMES
+const THEMES=[
+  {id:'default',    name:'暗夜金',   desc:'深黑 · 金色 · 默认',        bg:'#0f0f0f', accent:'#c8a96e', text:'#e8e6e0', font:'Noto Sans SC'},
+  {id:'forest',     name:'墨绿夜',   desc:'深绿 · 清冷 · 护眼',        bg:'#0a110d', accent:'#6dbd6d', text:'#d4e8d4', font:'Noto Sans SC'},
+  {id:'pure',       name:'纯白简约', desc:'纯白 · 极简 · DM Sans',     bg:'#ffffff', accent:'#1a1a1a', text:'#111111', font:'DM Sans'},
+  {id:'parchment',  name:'羊皮纸',   desc:'米黄 · 古典 · Lora衬线',    bg:'#fdf8f0', accent:'#7a4a18', text:'#2a1e10', font:'Lora'},
+  {id:'editorial',  name:'编辑室',   desc:'暖灰 · 严肃 · Playfair',   bg:'#f7f4ef', accent:'#c0390c', text:'#1a1614', font:'Playfair'},
+  {id:'cyber',      name:'赛博终端', desc:'淡绿 · 等宽 · IBM Mono',   bg:'#f0f4f0', accent:'#00aa00', text:'#002800', font:'IBM Mono'},
+  {id:'stone',      name:'水泥灰',   desc:'暖灰 · 现代 · DM Sans',    bg:'#f2f0ee', accent:'#4a4640', text:'#1e1c1a', font:'DM Sans'},
+  {id:'sakura',     name:'樱花粉',   desc:'粉白 · 轻盈 · 宋体',        bg:'#fdf6f8', accent:'#c0506a', text:'#2a1820', font:'Noto Serif'},
+];
+
+function applyTheme(id){
+  document.documentElement.setAttribute('data-theme',id==='default'?'':id);
+  localStorage.setItem('journal_theme',id);
+}
+function openThemePicker(){
+  const saved=localStorage.getItem('journal_theme')||'default';
+  const grid=$('theme-grid');
+  grid.innerHTML=THEMES.map(t=>`
+    <div onclick="applyTheme('${t.id}');document.querySelectorAll('.theme-opt').forEach(e=>e.style.outline='2px solid transparent');this.style.outline='2px solid ${t.accent}';"
+      class="theme-opt"
+      style="padding:12px;border-radius:8px;cursor:pointer;outline:${t.id===saved?`2px solid ${t.accent}`:'2px solid transparent'};background:${t.bg};transition:outline .12s;">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;">
+        <div style="width:11px;height:11px;border-radius:50%;background:${t.accent};flex-shrink:0;"></div>
+        <span style="font-size:12px;font-weight:500;color:${t.text};">${t.name}</span>
+      </div>
+      <div style="font-size:10px;color:${t.text};opacity:.55;line-height:1.4;">${t.desc}</div>
+    </div>`).join('');
+  $('theme-overlay').style.display='flex';
+}
+(function(){
+  const saved=localStorage.getItem('journal_theme');
+  if(saved&&saved!=='default')applyTheme(saved);
+})();
+
+// CLEAR ALL
+function clearAllData(){
+  if(!confirm('⚠️ 确认清空所有数据？\n\n包括持仓、交易记录、复盘日记、信号、资源站等所有内容。\n\n建议先导出备份再清空。'))return;
+  if(!confirm('再次确认：清空后无法恢复，确定继续？'))return;
+  localStorage.removeItem(KEY);
+  showToast('已清空全部数据，即将刷新...');
+  setTimeout(()=>location.reload(),1400);
+}
+
+initDate();loadToday();renderCal();
 </script>
 </body>
 </html>
